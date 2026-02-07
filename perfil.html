@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e01a7a",
+                        "brand-purple": "#4a1a79",
+                        "brand-orange": "#ef972c",
+                        "brand-teal": "#4db9bd",
+                        "background-light": "#fff1f2",
+                        "background-dark": "#211119",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>TEEN4STEAM User Profile &amp; Stats</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#1b0e14] dark:text-white transition-colors duration-300">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl">auto_awesome</span>
+</div>
+<h2 class="text-[#1b0e14] dark:text-white text-xl font-bold leading-tight tracking-tight">TEEN4STEAM</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full">
+<div class="text-primary/60 flex border-none bg-primary/5 dark:bg-primary/20 items-center justify-center pl-4 rounded-l-xl">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1b0e14] dark:text-white focus:outline-0 focus:ring-0 border-none bg-primary/5 dark:bg-primary/20 placeholder:text-primary/40 px-4 rounded-l-none pl-2 text-base font-normal" placeholder="Search courses..."/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-[#1b0e14] dark:text-white text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-[#1b0e14] dark:text-white text-sm font-medium hover:text-primary transition-colors" href="#">Courses</a>
+<a class="text-[#1b0e14] dark:text-white text-sm font-medium hover:text-primary transition-colors" href="#">Projects</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Profile</a>
+</div>
+<div class="flex gap-2">
+<button class="flex cursor-pointer items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="User profile thumbnail smiling woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCPzz2mT_yqQ6OCvfxLdM3zTfJk4gr6dEtcoWm00uqBjpbI7L1F7YwT4CeyVFp-q1VSN3EAPVDIM6E5pxo5GFrCdCd3Q-OJ5hAWljLSbjoeusp4dd1mIVvUGq9WRMpVAwR_g5GsGlFoitewTR19l7uk_YY2d3DlFZwUn8MpJogybMWWPzajGMwBCUGaViqzP-lgOskd8lJpDzcdCi5PxiJhujS0jhWw6AlsPCU5rFsuC3rJKbMcXRQPagGn1iaAyYChJUC6ELr5gok");'></div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-10 px-4">
+<div class="layout-content-container flex flex-col max-w-[1000px] flex-1 gap-6">
+<!-- Profile Header Card -->
+<div class="relative bg-white dark:bg-[#2d1822] p-8 rounded-xl shadow-xl border-t-4 border-primary overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16"></div>
+<div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-32 ring-4 ring-primary/10" data-alt="Main user profile picture of Sarah Jenkins" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCPEcS7OrxHWDgCWR2wsOBCdgFPFfx0wV4aWrfzua1hhAO_Nl3omJAz8kglJGuKC4gzK4R1yEiE1NfJPDVQco068QQG30GKi5_gYu9KO6iXy2JynRq-4MiRaeC6hnGnNxZIfeK6KoFsJBMqYq-UJBQ8K0ruyqlkzX8Fkyuhu6XFp12GF6CkYMvAGnzLMc2s56GCj2k1OCm4Nth7GGSXJFiKMc2RyOqV3qSaCJyVycu8HQXTvoH268y7d3I00xZvC7wlOYzi5K2vHoI");'></div>
+<button class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-lg border-2 border-white dark:border-[#2d1822] hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<div class="flex flex-col items-center md:items-start text-center md:text-left">
+<h1 class="text-3xl font-bold text-[#1b0e14] dark:text-white">Sarah Jenkins</h1>
+<p class="text-primary/70 font-medium">Member since June 15, 2023</p>
+<div class="flex gap-3 mt-4">
+<span class="px-3 py-1 bg-brand-purple/10 text-brand-purple text-xs font-bold rounded-full uppercase tracking-wider">Visionary</span>
+<span class="px-3 py-1 bg-brand-teal/10 text-brand-teal text-xs font-bold rounded-full uppercase tracking-wider">Top Contributor</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Left Column: Account Details -->
+<div class="bg-white dark:bg-[#2d1822] p-6 rounded-xl shadow-lg border border-primary/5">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">person</span>
+<h3 class="text-xl font-bold">Account Details</h3>
+</div>
+<div class="flex flex-col gap-5">
+<label class="flex flex-col gap-1.5">
+<span class="text-sm font-semibold text-primary/80">Full Name</span>
+<input class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="Sarah Jenkins"/>
+</label>
+<label class="flex flex-col gap-1.5">
+<span class="text-sm font-semibold text-primary/80">Gmail</span>
+<input class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="email" value="sarah.jenkins@gmail.com"/>
+</label>
+<label class="flex flex-col gap-1.5">
+<span class="text-sm font-semibold text-primary/80">Password</span>
+<div class="relative">
+<input class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="password" value="••••••••••••"/>
+<button class="absolute right-3 top-3 text-primary/50 hover:text-primary">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</div>
+</label>
+<label class="flex flex-col gap-1.5">
+<span class="text-sm font-semibold text-primary/80">Gender</span>
+<select class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none">
+<option selected="">Female</option>
+<option>Non-binary</option>
+<option>Prefer not to say</option>
+<option>Other</option>
+</select>
+</label>
+<button class="mt-2 bg-primary text-white py-3 rounded-xl font-bold hover:opacity-90 transition-opacity">Save Changes</button>
+</div>
+</div>
+<!-- Right Column: STEAM Experience -->
+<div class="bg-white dark:bg-[#2d1822] p-6 rounded-xl shadow-lg border border-primary/5 flex flex-col">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">rocket_launch</span>
+<h3 class="text-xl font-bold">STEAM Experience</h3>
+</div>
+<p class="text-primary/60 text-sm mb-4">Select your core interests to personalize your learning journey.</p>
+<div class="flex flex-wrap gap-2 mb-auto">
+<div class="px-4 py-2 bg-brand-purple text-white rounded-full text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">smart_toy</span> Robotics
+                                </div>
+<div class="px-4 py-2 bg-brand-teal text-white rounded-full text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">terminal</span> Coding
+                                </div>
+<div class="px-4 py-2 bg-brand-orange text-white rounded-full text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">architecture</span> Engineering
+                                </div>
+<div class="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">palette</span> Digital Art
+                                </div>
+<div class="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">science</span> Biotech
+                                </div>
+<div class="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">functions</span> Applied Math
+                                </div>
+<div class="px-4 py-2 bg-primary/5 text-primary/40 border border-primary/10 border-dashed rounded-full text-sm font-bold flex items-center gap-2 cursor-pointer hover:bg-primary/10">
+<span class="material-symbols-outlined text-sm">add</span> Add Interest
+                                </div>
+</div>
+<div class="mt-8 bg-background-light dark:bg-background-dark p-4 rounded-xl">
+<h4 class="font-bold mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-orange">emoji_events</span>
+                                    Current Focus
+                                </h4>
+<p class="text-sm opacity-80 leading-relaxed">Completing the "Advanced Python for Data Science" track. 85% of milestone 3 achieved.</p>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Gamification Dashboard -->
+<div class="bg-gradient-to-br from-brand-purple via-[#6122a1] to-primary p-1 rounded-xl shadow-2xl">
+<div class="bg-white dark:bg-[#2d1822] rounded-[0.9rem] p-8">
+<div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+<div class="flex items-center gap-6">
+<div class="relative size-24 flex items-center justify-center">
+<svg class="absolute inset-0 size-full -rotate-90">
+<circle class="text-primary/10" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-brand-orange" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-dasharray="264" stroke-dashoffset="66" stroke-width="8"></circle>
+</svg>
+<div class="flex flex-col items-center">
+<span class="text-3xl font-bold">12</span>
+<span class="text-[10px] uppercase font-bold text-primary/60">Level</span>
+</div>
+</div>
+<div>
+<h3 class="text-2xl font-bold flex items-center gap-2">
+                                            STEAM SPARKS 
+                                            <span class="material-symbols-outlined text-brand-orange fill-1">bolt</span>
+</h3>
+<p class="text-3xl font-extrabold text-primary">4,850 <span class="text-sm font-medium text-primary/60">Points</span></p>
+</div>
+</div>
+<div class="flex-1 w-full max-w-lg">
+<div class="flex justify-between items-end mb-2">
+<p class="text-sm font-bold text-primary/80 uppercase">Progress to Level 13</p>
+<p class="text-xs font-bold">150 sparks remaining</p>
+</div>
+<div class="w-full bg-primary/10 h-4 rounded-full overflow-hidden flex">
+<div class="h-full bg-brand-orange w-3/4 rounded-full"></div>
+</div>
+<div class="flex justify-between mt-3">
+<div class="flex items-center gap-1.5 opacity-60">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+<span class="text-xs font-bold">7 Day Streak</span>
+</div>
+<div class="flex items-center gap-1.5 opacity-60">
+<span class="material-symbols-outlined text-sm">military_tech</span>
+<span class="text-xs font-bold">24 Badges</span>
+</div>
+</div>
+</div>
+<button class="w-full lg:w-auto px-8 py-4 bg-brand-orange text-white rounded-xl font-bold shadow-lg hover:translate-y-[-2px] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">redeem</span>
+                                    Redeem Rewards
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="px-10 py-8 border-t border-primary/10 text-center opacity-50 text-sm">
+<p>© 2024 TEEN4STEAM. Empowering the next generation of girls in STEAM.</p>
+</footer>
+</div>
+</div>
+</body></html>

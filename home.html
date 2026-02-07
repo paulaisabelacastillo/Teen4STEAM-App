@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>TEEN4STEAM | Empowering Girls in STEAM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#da237b",
+                        "secondary": "#4a1a79",
+                        "accent": "#ef972c",
+                        "neutral-light": "#ffffff",
+                        "neutral-border": "#f1f5f9",
+                        "text-main": "#1e293b",
+                        "text-muted": "#64748b"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fff1f2;
+            color: #1e293b;
+        }
+        .soft-shadow {
+            box-shadow: 0 10px 30px -10px rgba(74, 26, 121, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .instagram-gradient {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(74, 26, 121, 0.95), rgba(74, 26, 121, 0.6), transparent);
+        }
+    </style>
+</head>
+<body class="bg-[#fff1f2]">
+
+<nav class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-lg border-b border-rose-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 flex items-center justify-center">
+                    <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                </div>
+                <span class="text-xl font-extrabold tracking-tight text-secondary uppercase">TEEN4STEAM</span>
+            </div>
+            <div class="hidden xl:flex items-center gap-6">
+                <a class="text-primary font-bold text-xs" href="#">Home</a>
+                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Community</a>
+                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">AI Tutor</a>
+                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Xperience</a>
+                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Marketplace</a>
+                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Podcast</a>
+                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Festival</a>
+                <a class="text-text-muted hover:text-secondary font-bold text-xs transition-colors" href="#">Our Playground</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden md:flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5">
+                <span class="material-symbols-outlined text-slate-400 text-lg">search</span>
+                <input class="bg-transparent border-none focus:ring-0 text-xs w-28 placeholder:text-slate-400" placeholder="Search..." type="text"/>
+            </div>
+            <button class="bg-secondary hover:bg-opacity-90 text-white px-5 py-2 rounded-full font-bold text-xs shadow-lg shadow-secondary/10 transition-all">
+                Join Now
+            </button>
+            <div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden bg-white shadow-sm">
+                <img src="data:image/png;base64,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" class="w-full h-full object-cover" alt="Profile">
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-6 py-12">
+    <section class="relative rounded-[2.5rem] overflow-hidden mb-24 bg-secondary shadow-2xl min-h-[500px] flex items-center">
+        <div class="absolute inset-0 z-0 bg-cover bg-center opacity-60" style="background-image: url('img/portada.png');"></div>
+        <div class="absolute inset-0 z-1 hero-overlay"></div>
+        
+        <div class="relative z-10 px-12 py-12 max-w-3xl flex flex-col gap-6">
+            <div class="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 px-4 py-1 rounded-full text-accent font-bold text-[10px] uppercase tracking-widest w-fit">
+                <span class="material-symbols-outlined text-xs">rocket_launch</span>
+                NEW: AI TUTOR 2.0
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <span class="text-accent font-black text-sm uppercase tracking-[0.3em] mb-2">From Girls to Girls</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.1] tracking-tight text-white">
+                    Empowering the <br/><span class="text-accent">Next Generation</span> <br/>of Women in STEAM
+                </h1>
+            </div>
+
+
+            <div class="flex flex-wrap gap-4 pt-2">
+                <button class="bg-primary hover:scale-[1.05] active:scale-[0.98] text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-primary/40 flex items-center gap-2 transition-all">
+                    Join the Community
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+                <button class="bg-white/10 backdrop-blur-md border-2 border-white/20 hover:bg-white hover:text-secondary text-white px-8 py-4 rounded-2xl font-bold text-sm transition-all">
+                    Explore Our Playground
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-24">
+        <div class="flex items-center justify-between mb-12">
+            <h2 class="text-3xl font-extrabold text-secondary flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-4xl">diversity_1</span>
+                Our Mission & Vision
+            </h2>
+            <div class="h-px flex-1 bg-rose-200 ml-8"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="p-10 rounded-[2rem] bg-white border-2 border-rose-50 hover:border-primary/20 transition-all soft-shadow relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 text-primary/5 group-hover:text-primary/10 transition-colors">
+                    <span class="material-symbols-outlined text-[180px]">emoji_objects</span>
+                </div>
+                <div class="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-primary/30">
+                    <span class="material-symbols-outlined text-white text-3xl">target</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-secondary">Our Mission</h3>
+                <p class="text-text-muted leading-relaxed text-lg relative z-10">
+                    We want every girl in the world to know she can be an expert in technology and science. We use games and AI to make learning fun and to break down every barrier in our way. At Teen4STEM, we help you believe in yourself so you can become the engineer, scientist, or innovator the world needs.
+                </p>
+            </div>
+            <div class="p-10 rounded-[2rem] bg-white border-2 border-rose-50 hover:border-secondary/20 transition-all soft-shadow relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 text-secondary/5 group-hover:text-secondary/10 transition-colors">
+                    <span class="material-symbols-outlined text-[180px]">visibility</span>
+                </div>
+                <div class="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-secondary/30">
+                    <span class="material-symbols-outlined text-white text-3xl">insights</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-secondary">Our Vision</h3>
+                <p class="text-text-muted leading-relaxed text-lg relative z-10">
+                    We dream of a world where it doesn’t matter if you are a girl or a boy to succeed in tech. We want to see millions of girls leading the future, creating amazing things, and proving that we can change the world with our ideas and talent.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-24">
+        <div class="flex items-center justify-between mb-12">
+            <h2 class="text-3xl font-extrabold text-secondary flex items-center gap-3">
+                <span class="material-symbols-outlined text-accent text-4xl">groups_3</span>
+                Meet the Team
+            </h2>
+            <div class="h-px flex-1 bg-rose-200 ml-8"></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-[2rem] soft-shadow border border-rose-100 flex flex-col items-center text-center group transition-all hover:-translate-y-2">
+                <div class="w-32 h-32 rounded-full mb-6 ring-4 ring-primary/10 overflow-hidden bg-rose-50">
+                    <img src="img/paula.jpeg" class="w-full h-full object-cover" alt="Paula Castillo">
+                </div>
+                <h4 class="text-xl font-bold text-secondary mb-1">Paula Castillo</h4>
+                <p class="text-primary font-bold text-[10px] mb-4 uppercase tracking-widest leading-tight">Founder, <br>Innovation & Development</p>
+                <p class="text-text-muted text-sm leading-relaxed italic">"Programming is like a musical score; every line of code creates a melody that inspires you to change the world." 🎼 💻</p>
+            </div>
+            <div class="bg-white p-8 rounded-[2rem] soft-shadow border border-rose-100 flex flex-col items-center text-center group transition-all hover:-translate-y-2">
+                <div class="w-32 h-32 rounded-full mb-6 ring-4 ring-secondary/10 overflow-hidden bg-purple-50">
+                    <img src="img/mariana.jpeg" class="w-full h-full object-cover" alt="Mariana Coronado">
+                </div>
+                <h4 class="text-xl font-bold text-secondary mb-1">Mariana Coronado</h4>
+                <p class="text-primary font-bold text-[10px] mb-4 uppercase tracking-widest leading-tight">CoFounder, <br>Research & Creativity</p>
+                <p class="text-text-muted text-sm leading-relaxed italic">"STEAM is like dancing; it transforms ideas into art. 🎨💡"</p>
+            </div>
+            <div class="bg-white p-8 rounded-[2rem] soft-shadow border border-rose-100 flex flex-col items-center text-center group transition-all hover:-translate-y-2">
+                <div class="w-32 h-32 rounded-full mb-6 ring-4 ring-accent/10 overflow-hidden bg-orange-50">
+                    <img src="img/nathaly.jpeg" class="w-full h-full object-cover" alt="Nathaly Chung">
+                </div>
+                <h4 class="text-xl font-bold text-secondary mb-1">Nathaly Chung</h4>
+                <p class="text-primary font-bold text-[10px] mb-4 uppercase tracking-widest leading-tight">CoFounder, <br>Creation & Design</p>
+                <p class="text-text-muted text-sm leading-relaxed italic">"With STEAM, every brushstroke is an idea and a path that proves if you can dream it, you can achieve it. 🖌️🌈"</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ai-tutor" class="mb-24 py-12 border-y border-rose-100">
+    <div class="flex items-center justify-between mb-12">
+        <h2 class="text-3xl font-extrabold text-secondary flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-4xl">school</span>
+            Meet Your AI Tutor 2.0
+        </h2>
+        <div class="h-px flex-1 bg-rose-200 ml-8"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="flex flex-col gap-8">
+            <div class="flex flex-col gap-2">
+                <h3 class="text-4xl md:text-5xl font-extrabold tracking-tight text-secondary leading-tight">
+                    Personalized <br/>
+                    <span class="text-primary italic">STEAM Tutoring</span>
+                </h3>
+            </div>
+
+            <div class="relative group">
+                <div class="absolute -inset-2 bg-gradient-to-r from-primary to-accent opacity-20 blur-xl group-hover:opacity-40 transition-opacity"></div>
+                <div class="relative rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl aspect-[4/3]">
+                    <img src="img/tutor.png" 
+                         alt="STEAM Tutoring" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+            </div>
+
+            <button class="w-full md:w-fit px-10 py-5 bg-secondary text-white font-black text-sm rounded-2xl hover:bg-primary transition-all shadow-xl shadow-secondary/20 uppercase tracking-widest">
+                Start Learning Now
+            </button>
+        </div>
+
+        <div class="relative">
+            <div class="absolute -inset-4 bg-primary/5 blur-3xl rounded-full"></div>
+            <div class="relative bg-white border border-rose-100 rounded-[2.5rem] p-8 soft-shadow ring-8 ring-white/50">
+                <div class="flex items-center gap-4 mb-6 border-b border-rose-50 pb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined text-2xl">smart_toy</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-secondary">AI Tutor</p>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                            <p class="text-[10px] text-green-600 font-bold uppercase tracking-widest">Active Now</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6 h-72 overflow-y-auto pr-2 custom-scrollbar">
+                    <div class="bg-rose-50 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm text-secondary font-medium">
+                        Hi there! I'm your STEAM mentor. Ready to dive into some robotics today?
+                    </div>
+                    <div class="bg-primary text-white p-4 rounded-2xl rounded-tr-none ml-auto max-w-[85%] text-sm font-medium shadow-md shadow-primary/10">
+                        Yes! Can you explain how to connect an ultrasonic sensor to my Arduino?
+                    </div>
+                    <div class="bg-rose-50 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm text-secondary font-medium border border-rose-100">
+                        Great choice! First, let's look at the pins: VCC goes to 5V, GND to Ground... 🚀
+                    </div>
+                </div>
+
+                <div class="mt-8 flex gap-3">
+                    <input class="flex-1 bg-rose-50 border border-rose-100 rounded-xl px-4 py-3 text-sm focus:ring-primary outline-none transition-all" placeholder="Ask your STEAM question..." type="text"/>
+                    <button class="bg-primary hover:bg-opacity-90 w-12 h-12 rounded-xl flex items-center justify-center text-white transition-all shadow-md shadow-primary/20">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <section class="mb-24">
+        <div class="flex items-center justify-between mb-12">
+            <h2 class="text-3xl font-extrabold text-secondary flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-4xl">event_available</span>
+                Xperience: Upcoming Events
+            </h2>
+            <div class="h-px flex-1 bg-rose-200 ml-8"></div>
+            <a class="text-primary font-bold hover:underline flex items-center gap-1 ml-8 text-sm" href="#">
+                View Full Calendar <span class="material-symbols-outlined text-xs">open_in_new</span>
+            </a>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="bg-white border-2 border-rose-50 rounded-[2rem] overflow-hidden hover:border-primary/30 transition-all soft-shadow group">
+                <div class="h-48 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('img/festival.jpeg');"></div>
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-primary/10 text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Main Festival</span>
+                        <span class="text-text-muted text-xs font-bold bg-rose-50 px-2 py-1 rounded uppercase tracking-tighter">FEB 06</span>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2 text-secondary group-hover:text-primary transition-colors">Teen4STEAM Festival 2025</h4>
+                    <p class="text-text-muted text-sm mb-6 leading-relaxed">Workshops, talks, and massive innovation in the year's most awaited festival. Don't miss out!</p>
+                    <button class="w-full py-4 bg-secondary text-white rounded-2xl text-sm font-bold shadow-lg shadow-secondary/20 hover:bg-primary transition-all active:scale-95">
+                        Register Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white border-2 border-rose-50 rounded-[2rem] overflow-hidden hover:border-accent/30 transition-all soft-shadow group">
+                <div class="h-48 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80');"></div>
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-accent/10 text-accent text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Workshop</span>
+                        <span class="text-text-muted text-xs font-bold bg-rose-50 px-2 py-1 rounded uppercase tracking-tighter">OCT 22</span>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2 text-secondary group-hover:text-accent transition-colors">Digital Art STEAM Fest</h4>
+                    <p class="text-text-muted text-sm mb-6 leading-relaxed">Explore the intersection of generative AI and traditional digital illustration with top mentors.</p>
+                    <button class="w-full py-4 bg-rose-50 text-secondary border border-rose-100 rounded-2xl text-sm font-bold hover:bg-accent hover:text-white transition-all active:scale-95">
+                        Set Reminder
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-primary/5 border-2 border-dashed border-primary/20 rounded-[2rem] p-8 flex flex-col justify-center items-center text-center transition-all hover:bg-primary/10">
+                <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center mb-6 shadow-xl shadow-primary/10">
+                    <span class="material-symbols-outlined text-primary text-4xl">add_circle</span>
+                </div>
+                <h4 class="font-bold text-xl mb-3 text-secondary">Have an Idea?</h4>
+                <p class="text-text-muted text-sm mb-8 max-w-[220px] leading-relaxed">Propose a new challenge or host your own STEAM workshop for the community.</p>
+                <button class="bg-primary text-white px-8 py-3.5 rounded-2xl font-bold text-sm shadow-lg shadow-primary/30 hover:scale-105 transition-all active:scale-95">
+                    Submit Proposal
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-24">
+        <div class="flex items-center justify-between mb-10">
+            <h2 class="text-3xl font-extrabold text-secondary flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-4xl">subscriptions</span>
+                Culture & Media
+            </h2>
+            <div class="h-px flex-1 bg-rose-200 ml-8"></div>
+        </div>
+        <div class="grid lg:grid-cols-3 gap-8">
+            <a class="group relative block rounded-[2.5rem] overflow-hidden aspect-square bg-slate-900 shadow-2xl transition-all" href="#">
+                <div class="absolute inset-0 z-0 bg-cover bg-center opacity-70 group-hover:scale-110 transition-transform duration-700" style="background-image: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/40 to-transparent opacity-90"></div>
+                <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                    <span class="bg-red-600 text-white w-fit px-3 py-1 rounded-full text-[10px] font-bold mb-4 uppercase">YouTube</span>
+                    <h3 class="text-2xl font-black text-white leading-tight">STEAM Talk Podcast</h3>
+                </div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-xl"><span class="material-symbols-outlined text-secondary text-4xl ml-1">play_arrow</span></div>
+                </div>
+            </a>
+            <a class="group relative block rounded-[2.5rem] overflow-hidden aspect-square bg-slate-900 shadow-2xl transition-all" href="#">
+                <div class="absolute inset-0 z-0 bg-cover bg-center opacity-70 group-hover:scale-110 transition-transform duration-700" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90"></div>
+                <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                    <span class="bg-[#1DB954] text-white w-fit px-3 py-1 rounded-full text-[10px] font-bold mb-4 uppercase">Spotify</span>
+                    <h3 class="text-2xl font-black text-white leading-tight">TEEN4STEAM Radio</h3>
+                </div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-xl text-[#1DB954]"><span class="material-symbols-outlined text-4xl">graphic_eq</span></div>
+                </div>
+            </a>
+            <a class="group relative block rounded-[2.5rem] overflow-hidden aspect-square bg-slate-900 shadow-2xl transition-all" href="#">
+                <div class="absolute inset-0 z-0 bg-cover bg-center opacity-70 group-hover:scale-110 transition-transform duration-700" style="background-image: url('https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#833ab4] via-[#fd1d1d]/40 to-transparent opacity-90"></div>
+                <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                    <div class="bg-red-500 text-white w-fit px-3 py-1 rounded-full text-[10px] font-black mb-4 uppercase flex items-center gap-1.5 shadow-lg"><span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>LIVE</div>
+                    <h3 class="text-2xl font-black text-white leading-tight">TEEN4STEAM Live</h3>
+                </div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-xl text-orange-600"><span class="material-symbols-outlined text-4xl">videocam</span></div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="mb-24 py-12">
+        <div class="flex flex-col items-center text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-secondary mb-4">Our Allies</h2>
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-4xl text-secondary">corporate_fare</span><span class="font-bold text-xl text-secondary">Senacyt</span></div>
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-4xl text-secondary">school</span><span class="font-bold text-xl text-secondary">Rincones Clubhouse</span></div>
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-4xl text-secondary">rocket</span><span class="font-bold text-xl text-secondary">Rincon Clubhouse Explora</span></div>
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-4xl text-secondary">foundation</span><span class="font-bold text-xl text-secondary">Museo Explora</span></div>
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-4xl text-secondary">hub</span><span class="font-bold text-xl text-secondary">Women in Tech</span></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">
+                    Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.
+                </p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm" title="Follow us on Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm" title="Subscribe on YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path>
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="#home">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#ai-tutor">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#xperience">Xperience</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="#media">Podcast</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#xperience">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Playground</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Marketplace</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">
+                © TEEN4STEAM
+            </p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
