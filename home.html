@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>TEEN4STEAM | Empowering Girls in STEAM</title>
+    <title>TEEN4STEAM</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -60,37 +60,53 @@
 </head>
 <body class="bg-[#fff1f2]">
 
-<nav class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-lg border-b border-rose-100">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div class="flex items-center gap-8">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 flex items-center justify-center">
-                    <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
-                </div>
-                <span class="text-xl font-extrabold tracking-tight text-secondary uppercase">TEEN4STEAM</span>
+<nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+        
+        <a href="home.html" class="flex items-center gap-2 group shrink-0">
+            <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+                <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
             </div>
-            <div class="hidden xl:flex items-center gap-6">
-                <a class="text-primary font-bold text-xs" href="#">Home</a>
-                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Community</a>
-                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">AI Tutor</a>
-                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Xperience</a>
-                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Marketplace</a>
-                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Podcast</a>
-                <a class="text-text-muted hover:text-secondary font-semibold text-xs transition-colors" href="#">Festival</a>
-                <a class="text-text-muted hover:text-secondary font-bold text-xs transition-colors" href="#">Our Playground</a>
-            </div>
+            <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+                TEEN<span class="text-rose-500">4</span>STEAM
+            </span>
+        </a>
+
+        <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+            <a class="px-2 py-2 text-[12px] font-bold text-rose-600" href="home.html">Home</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="podcast.html">Podcast</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">ULearn</a>
+            
+            <a class="px-2 py-2 text-[12px] font-black text-slate-900 hover:text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+                Our Playground
+            </a>
         </div>
-        <div class="flex items-center gap-4">
-            <div class="hidden md:flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5">
-                <span class="material-symbols-outlined text-slate-400 text-lg">search</span>
-                <input class="bg-transparent border-none focus:ring-0 text-xs w-28 placeholder:text-slate-400" placeholder="Search..." type="text"/>
+
+        <div class="flex items-center gap-4 shrink-0">
+            
+            <div class="relative group hidden md:block">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                
+                <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+                    <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+                    <input 
+                        class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" 
+                        placeholder="Explorar" 
+                        type="text"
+                    />
+                </div>
             </div>
-            <button class="bg-secondary hover:bg-opacity-90 text-white px-5 py-2 rounded-full font-bold text-xs shadow-lg shadow-secondary/10 transition-all">
-                Join Now
+
+            <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+                <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                </div>
             </button>
-            <div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden bg-white shadow-sm">
-                <img src="data:image/png;base64,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" class="w-full h-full object-cover" alt="Profile">
-            </div>
         </div>
     </div>
 </nav>
@@ -338,7 +354,7 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/40 to-transparent opacity-90"></div>
                 <div class="absolute inset-0 p-8 flex flex-col justify-end">
                     <span class="bg-red-600 text-white w-fit px-3 py-1 rounded-full text-[10px] font-bold mb-4 uppercase">YouTube</span>
-                    <h3 class="text-2xl font-black text-white leading-tight">STEAM Talk Podcast</h3>
+                    <h3 class="text-2xl font-black text-white leading-tight">STEAM Talk Vlog</h3>
                 </div>
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-500">
                     <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-xl"><span class="material-symbols-outlined text-secondary text-4xl ml-1">play_arrow</span></div>
@@ -359,7 +375,7 @@
                 <div class="absolute inset-0 z-0 bg-cover bg-center opacity-70 group-hover:scale-110 transition-transform duration-700" style="background-image: url('https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&q=80');"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#833ab4] via-[#fd1d1d]/40 to-transparent opacity-90"></div>
                 <div class="absolute inset-0 p-8 flex flex-col justify-end">
-                    <div class="bg-red-500 text-white w-fit px-3 py-1 rounded-full text-[10px] font-black mb-4 uppercase flex items-center gap-1.5 shadow-lg"><span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>LIVE</div>
+                    <div class="bg-red-500 text-white w-fit px-3 py-1 rounded-full text-[10px] font-black mb-4 uppercase flex items-center gap-1.5 shadow-lg"><span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>INSTAGRAM</div>
                     <h3 class="text-2xl font-black text-white leading-tight">TEEN4STEAM Live</h3>
                 </div>
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-500">
@@ -410,21 +426,26 @@
                             <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
                         </svg>
                     </a>
+                   <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#833AB4] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm cursor-default" title="TikTok (Próximamente)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                    </svg>
+                    </a>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 col-span-2 gap-8">
                 <ul class="space-y-4 text-sm text-text-muted font-bold">
-                    <li><a class="hover:text-primary transition-colors" href="#home">Home</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#">Community</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#ai-tutor">AI Tutor</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#xperience">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
                 </ul>
                 <ul class="space-y-4 text-sm text-text-muted font-bold">
-                    <li><a class="hover:text-primary transition-colors" href="#media">Podcast</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#xperience">Festival</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#">Playground</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#">Marketplace</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="podcast.html">Podcast</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Playground</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
                 </ul>
             </div>
         </div>

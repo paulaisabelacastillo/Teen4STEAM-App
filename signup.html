@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teen4STEAM - Sign Up</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Fonts + Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            // From your navbar/footer system
+            primary: "#da237b",
+            secondary: "#4a1a79",
+            accent: "#ef972c",
+            "neutral-light": "#ffffff",
+            "neutral-border": "#f1f5f9",
+            "text-main": "#1e293b",
+            "text-muted": "#64748b",
+
+            // Keep your original backgrounds
+            "background-light": "#fff1f2",
+            "background-dark": "#201219",
+          },
+          fontFamily: { display: ["Plus Jakarta Sans", "sans-serif"] },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            "2xl": "2rem",
+            full: "9999px",
+          },
+          boxShadow: {
+            glow: "0 0 0 1px rgba(218,35,123,.20), 0 20px 80px rgba(218,35,123,.18)",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { font-family: "Plus Jakarta Sans", sans-serif; }
+    @keyframes floaty { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-10px)} }
+    @keyframes twinkle { 0%,100%{opacity:.25} 50%{opacity:.75} }
+    .soft-shadow { box-shadow: 0 10px 30px -10px rgba(74, 26, 121, 0.08); }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+  </style>
+
+  <!-- ✅ Firebase (UPDATED config + modular imports + analytics) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtJZ9-pjUmppxctfee3uGX2aADL8D9evk",
+      authDomain: "login-steam-educ.firebaseapp.com",
+      projectId: "login-steam-educ",
+      storageBucket: "login-steam-educ.firebasestorage.app",
+      messagingSenderId: "914739570610",
+      appId: "1:914739570610:web:3c3bc621ed7fc888a2a6ab",
+      measurementId: "G-DMSS96138N"
+    };
+
+    const app = initializeApp(firebaseConfig);
+
+    // Analytics (works only on https or localhost)
+    try { getAnalytics(app); } catch(e) {}
+
+    const auth = getAuth(app);
+
+    window.registerUser = async function () {
+      const email = document.getElementById("reg_email").value.trim();
+      const password = document.getElementById("reg_password").value;
+
+      if (!email || !password) {
+        alert(window.__lang === "es" ? "Ingresa tu correo y contraseña." : "Please enter your email and password.");
+        return;
+      }
+      if (password.length < 6) {
+        alert(window.__lang === "es" ? "La contraseña debe tener al menos 6 caracteres." : "Password must be at least 6 characters.");
+        return;
+      }
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert(window.__lang === "es" ? "¡Cuenta creada! Redirigiendo..." : "Account created successfully! Redirecting...");
+        window.location.href = "playground.html";
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-[#fff1f2] text-text-main min-h-screen relative overflow-x-hidden">
+
+<nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+        
+        <a href="home.html" class="flex items-center gap-2 group shrink-0">
+            <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+                <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+            </div>
+            <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+                TEEN<span class="text-rose-500">4</span>STEAM
+            </span>
+        </a>
+
+        <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="podcast.html">Podcast</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">ULearn</a>
+            
+            <a class="px-2 py-2 text-[12px] font-black text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+              Our Playground
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4 shrink-0">
+            
+            <div class="relative group hidden md:block">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                
+                <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+                    <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+                    <input 
+                        class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" 
+                        placeholder="Explorar" 
+                        type="text"
+                    />
+                </div>
+            </div>
+
+            <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+                <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                </div>
+            </button>
+        </div>
+    </div>
+</nav>
+
+  <!-- Decorative background (same as your signup) -->
+  <div class="absolute inset-0 pointer-events-none -z-10">
+    <div class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl"></div>
+    <div class="absolute -bottom-28 -right-24 h-80 w-80 rounded-full bg-primary/15 blur-3xl"></div>
+
+    <div class="absolute top-28 left-10 text-primary/10 select-none animate-[floaty_6s_ease-in-out_infinite]">
+      <span class="material-symbols-outlined text-[120px]">settings</span>
+    </div>
+    <div class="absolute bottom-32 right-10 text-primary/10 select-none animate-[floaty_7s_ease-in-out_infinite]">
+      <span class="material-symbols-outlined text-[150px]">auto_awesome</span>
+    </div>
+    <div class="absolute top-1/2 -left-14 text-primary/5 select-none -rotate-12 animate-[twinkle_3s_ease-in-out_infinite]">
+      <span class="material-symbols-outlined text-[220px]">science</span>
+    </div>
+  </div>
+
+  <!-- MAIN SIGNUP CONTENT -->
+  <main class="relative">
+    <div class="min-h-[calc(100vh-5rem)] flex items-center justify-center p-4">
+      <div class="w-full max-w-[1100px]">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch py-10">
+          <!-- Left: Form Card -->
+          <section class="bg-white/85 dark:bg-zinc-900/80 backdrop-blur rounded-2xl border border-primary/15 shadow-glow p-7 md:p-10">
+            <div class="mb-8">
+              <h1 id="title" class="text-text-main dark:text-white text-4xl font-extrabold leading-tight mb-2">
+                Welcome
+              </h1>
+              <p id="subtitle" class="text-text-muted dark:text-zinc-400 text-lg font-medium">
+                Sign Up to Continue
+              </p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); registerUser();" class="space-y-5">
+              <!-- Email -->
+              <div class="space-y-2">
+                <label id="emailLabel" class="text-text-main dark:text-zinc-200 font-bold ml-1 text-sm">Email</label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">mail</span>
+                  <input
+                    id="reg_email"
+                    type="email"
+                    required
+                    placeholder="Email Address"
+                    class="w-full pl-12 pr-4 py-4 rounded-xl border border-primary/20 bg-background-light/70 dark:bg-zinc-800/70
+                           focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all dark:text-white"
+                  />
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="space-y-2">
+                <label id="passLabel" class="text-text-main dark:text-zinc-200 font-bold ml-1 text-sm">Password</label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock</span>
+                  <input
+                    id="reg_password"
+                    type="password"
+                    required
+                    placeholder="Password"
+                    class="w-full pl-12 pr-4 py-4 rounded-xl border border-primary/20 bg-background-light/70 dark:bg-zinc-800/70
+                           focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all dark:text-white"
+                  />
+                </div>
+                <p class="text-xs text-slate-500 dark:text-zinc-400 ml-1">
+                  <span id="passHint">Minimum 6 characters.</span>
+                </p>
+              </div>
+
+              <!-- Remember + Mode -->
+              <div class="flex items-center justify-between">
+                <label class="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-zinc-300 select-none font-semibold">
+                  <input id="remember" type="checkbox" class="rounded border-primary/30 text-primary focus:ring-primary" />
+                  <span id="rememberText">Remember me</span>
+                </label>
+
+                <button
+                  type="button"
+                  class="text-sm font-bold text-primary hover:underline"
+                  onclick="document.documentElement.classList.toggle('dark')"
+                  title="Toggle dark mode"
+                >
+                  <span class="material-symbols-outlined align-middle text-[18px]">dark_mode</span>
+                  <span class="align-middle">Mode</span>
+                </button>
+              </div>
+
+              <!-- CTA -->
+              <button
+                id="cta"
+                type="submit"
+                class="w-full bg-primary text-white py-4 rounded-xl font-black text-lg hover:brightness-110 active:scale-[0.99]
+                       transition-all shadow-lg shadow-primary/25"
+              >
+                Sign Up
+              </button>
+
+              <!-- Link -->
+              <p id="accountLink" class="text-center text-text-muted dark:text-zinc-400 pt-1 font-semibold">
+                Already have an account? <a class="text-primary font-extrabold hover:underline" href="login.html">SIGN IN</a>
+              </p>
+            </form>
+          </section>
+
+          <!-- Right: Visual Panel (kept identical) -->
+          <section class="relative overflow-hidden rounded-2xl border border-primary/15 shadow-glow min-h-[280px] lg:min-h-[560px]">
+            <div class="absolute inset-0 bg-gradient-to-br from-white/50 via-primary/10 to-white/30 dark:from-zinc-900/60 dark:via-primary/10 dark:to-zinc-900/50"></div>
+
+            <div class="absolute inset-0 pointer-events-none">
+              <div class="absolute -top-24 left-1/2 -translate-x-1/2 h-72 w-72 rounded-full bg-primary/25 blur-3xl"></div>
+              <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-primary/10 to-transparent"></div>
+            </div>
+
+            <div class="relative h-full p-6 md:p-10 flex flex-col justify-between">
+              <div class="flex items-center gap-3">
+               
+              </div>
+
+              <div class="space-y-4">
+                <h3 id="panelTitle" class="text-3xl md:text-4xl font-black text-text-main dark:text-white leading-tight">
+                  Create. Build. Shine.
+                </h3>
+                <p id="panelText" class="text-slate-700 dark:text-zinc-300 text-base md:text-lg max-w-[46ch] font-medium">
+                  Your account unlocks personalized STEAM experiences, missions, and challenges inside Teen4STEAM.
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 rounded-full bg-white/70 dark:bg-zinc-900/70 backdrop-blur border border-primary/15 text-sm font-extrabold text-primary">Science</span>
+                  <span class="px-3 py-1 rounded-full bg-white/70 dark:bg-zinc-900/70 backdrop-blur border border-primary/15 text-sm font-extrabold text-primary">Tech</span>
+                  <span class="px-3 py-1 rounded-full bg-white/70 dark:bg-zinc-900/70 backdrop-blur border border-primary/15 text-sm font-extrabold text-primary">Engineering</span>
+                  <span class="px-3 py-1 rounded-full bg-white/70 dark:bg-zinc-900/70 backdrop-blur border border-primary/15 text-sm font-extrabold text-primary">Art</span>
+                  <span class="px-3 py-1 rounded-full bg-white/70 dark:bg-zinc-900/70 backdrop-blur border border-primary/15 text-sm font-extrabold text-primary">Math</span>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between text-sm text-slate-600 dark:text-zinc-400">
+                <span class="inline-flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[18px] text-primary">shield</span>
+                  <span id="panelFooter2">Safe & friendly</span>
+                </span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  
+<footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">
+                    Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.
+                </p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm" title="Follow us on Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm" title="Subscribe on YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path>
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
+                        </svg>
+                    </a>
+                   <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#833AB4] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm cursor-default" title="TikTok (Próximamente)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                    </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="podcast.html">Podcast</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Playground</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">
+                © TEEN4STEAM
+            </p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+  </footer>
+
+  <!-- Language Toggle Script (kept + fixed link text) -->
+  <script>
+    window.__lang = "en";
+    const el = (id) => document.getElementById(id);
+
+    function setLang(lang) {
+      window.__lang = lang;
+
+      if (lang === "es") {
+        el("title").innerText = "Bienvenida";
+        el("subtitle").innerText = "Regístrate para continuar";
+        el("emailLabel").innerText = "Correo";
+        el("passLabel").innerText = "Contraseña";
+        el("reg_email").placeholder = "Correo Electrónico";
+        el("reg_password").placeholder = "Contraseña";
+        el("passHint").innerText = "Mínimo 6 caracteres.";
+        el("rememberText").innerText = "Recuérdame";
+        el("cta").innerText = "Registrarse";
+        el("accountLink").innerHTML = '¿Ya tienes una cuenta? <a class="text-primary font-extrabold hover:underline" href="login.html">Iniciar Sesión</a>';
+
+        el("panelTitle").innerText = "Crea. Construye. Brilla.";
+        el("panelText").innerText = "Tu cuenta desbloquea experiencias STEAM personalizadas, misiones y desafíos dentro de Teen4STEAM.";
+        el("panelFooter").innerText = "Impulsado por curiosidad ✨";
+        el("panelFooter2").innerText = "Seguro y friendly";
+      } else {
+        el("title").innerText = "Welcome";
+        el("subtitle").innerText = "Sign Up to Continue";
+        el("emailLabel").innerText = "Email";
+        el("passLabel").innerText = "Password";
+        el("reg_email").placeholder = "Email Address";
+        el("reg_password").placeholder = "Password";
+        el("passHint").innerText = "Minimum 6 characters.";
+        el("rememberText").innerText = "Remember me";
+        el("cta").innerText = "Sign Up";
+        el("accountLink").innerHTML = 'Already have an account? <a class="text-primary font-extrabold hover:underline" href="login.html">SIGN IN</a>';
+
+        el("panelTitle").innerText = "Create. Build. Shine.";
+        el("panelText").innerText = "Your account unlocks personalized STEAM experiences, missions, and challenges inside Teen4STEAM.";
+        el("panelFooter").innerText = "Powered by curiosity ✨";
+        el("panelFooter2").innerText = "Safe & friendly";
+      }
+    }
+
+    document.getElementById("langBtn").addEventListener("click", () => {
+      setLang(window.__lang === "en" ? "es" : "en");
+    });
+  </script>
+</body>
+</html>

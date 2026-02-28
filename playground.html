@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Our Playground</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#da237b",
+            secondary: "#4a1a79",
+            accent: "#ef972c",
+            "neutral-light": "#ffffff",
+            "neutral-border": "#f1f5f9",
+            "text-main": "#1e293b",
+            "text-muted": "#64748b"
+          },
+          fontFamily: { display: ["Plus Jakarta Sans", "sans-serif"] },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body{
+      font-family:'Plus Jakarta Sans',sans-serif;
+      background:#ffffff;
+      color:#1e293b;
+      overflow-x:hidden;
+    }
+
+    .hero-container{
+      position:relative;
+      width:100%;
+      display:flex;
+      justify-content:center;
+      overflow:hidden;
+      min-height:1100px;
+    }
+
+    .background-world{
+      width:100%;
+      height:auto;
+      display:block;
+      min-width:2000px;
+      opacity:.80;
+    }
+
+    .islands-overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      z-index:10;
+      padding-top:220px;
+      padding-left:1%;
+      padding-right:1%;
+    }
+
+    .island-link{
+      display:block;
+      position:relative;
+      transition:all .7s ease-out;
+      width:115%;
+      max-width:1400px;
+      margin:0 -120px;
+    }
+
+    .island-link img{
+      width:100%;
+      height:auto;
+      object-fit:contain;
+      display:block;
+    }
+
+    /* Base shadows (ONLY islands) */
+    #island-adventurer img{ filter:drop-shadow(0 45px 55px rgba(30,64,175,.7)); }
+    #island-creator img{    filter:drop-shadow(0 40px 50px rgba(168,85,247,.5)); }
+    #island-builder img{    filter:drop-shadow(0 40px 50px rgba(239,68,68,.5)); }
+
+    /* Hover glows (ONLY islands) */
+    #island-adventurer:hover{
+      transform:scale(1.10);
+      z-index:50;
+      filter:drop-shadow(0 0 80px rgba(30,64,175,.9)) brightness(1.1);
+    }
+    #island-creator:hover{
+      transform:scale(1.10);
+      z-index:50;
+      filter:drop-shadow(0 0 70px rgba(168,85,247,.9)) brightness(1.1);
+    }
+    #island-builder:hover{
+      transform:scale(1.10);
+      z-index:50;
+      filter:drop-shadow(0 0 70px rgba(239,68,68,.9)) brightness(1.1);
+    }
+
+    @keyframes float{
+      0%,100%{ transform:translateY(0) rotate(0deg); }
+      50%{ transform:translateY(-40px) rotate(1.2deg); }
+    }
+    .floating{ animation:float 8s ease-in-out infinite; }
+    .delay-1{ animation-delay:2.5s; }
+    .delay-2{ animation-delay:5s; }
+
+    .playground-title{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:-50px;      /* MÁS ARRIBA */
+    width:500px;
+    z-index:100;
+    pointer-events:none;
+    filter:none;
+    }
+
+    @media (max-width:1024px){
+      .islands-overlay{
+        position:relative;
+        inset:auto;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:flex-start;
+        gap:4rem;
+        padding-top:80px;
+        padding-bottom:80px;
+        height:auto;
+      }
+
+      .island-link{
+        width:110%;
+        margin:0;
+        transform:none !important;
+      }
+
+      .playground-title{
+        width:120px;
+        top:40px;
+      }
+    }
+  </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+<nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+        
+        <a href="home.html" class="flex items-center gap-2 group shrink-0">
+            <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+                <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+            </div>
+            <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+                TEEN<span class="text-rose-500">4</span>STEAM
+            </span>
+        </a>
+
+        <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="podcast.html">Podcast</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">ULearn</a>
+            
+            <a class="px-2 py-2 text-[12px] font-black text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+              Our Playground
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4 shrink-0">
+            
+            <div class="relative group hidden md:block">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                
+                <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+                    <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+                    <input 
+                        class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" 
+                        placeholder="Explorar" 
+                        type="text"
+                    />
+                </div>
+            </div>
+
+            <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+                <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                </div>
+            </button>
+        </div>
+    </div>
+</nav>
+
+  <main class="hero-container">
+    <img src="img/mundo.png" class="background-world" alt="Mundo">
+
+    <div class="islands-overlay">
+      <!-- Adventurers -->
+      <a href="adventurers.html" id="island-adventurer" class="island-link floating">
+        <img src="img/adventurers.png" alt="Adventurers">
+      </a>
+
+      <!-- Builders -->
+      <a href="builders.html" id="island-creator" class="island-link floating delay-1">
+        <img src="img/builders.png" alt="Builders">
+      </a>
+
+      <!-- Creators -->
+      <a href="creators.html" id="island-builder" class="island-link floating delay-2">
+        <img src="img/creators.png" alt="Creators">
+      </a>
+    </div>
+
+    <img src="img/play.png" class="playground-title" alt="Our Playground">
+  </main>
+
+</body>
+</html>
