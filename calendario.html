@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en"> <head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e6197c",
+                        "secondary": "#4db9bd",
+                        "accent": "#ef972c",
+                        "background-light": "#fff1f2",
+                        "background-dark": "#211119",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen text-slate-900 dark:text-slate-100">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-10 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl font-bold">storm</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">TEEN4STEAM</h2>
+</div>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Community</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">AI Tutor</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Experience</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Marketplace</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Podcast</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Festival</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Our Playground</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex bg-primary/5 dark:bg-primary/20 rounded-full px-4 py-2 items-center gap-2 border border-primary/10">
+<span class="material-symbols-outlined text-primary text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-slate-400" placeholder="Search activities..." type="text"/>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="User profile avatar of a young girl" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5ppvhT0M6ZK4J9JzPK0aN2uW2XVUMuoTlDUzjQpPz17JrpHaYGqZaJIGASJSG3CGVkax5i3MirgnDEiLGqpeoM4K_gTJjhElknHkpLzJKwG9yjWsDkTS3jCNPFYRAVelp563Ac_cElFEVtWz3TFjaG3V6a8zE-LFjv3CUS9Zs3z7_bEx-U28ZCuuMgh7H8GhykmbQs-uDKmN3sTEMSdGTDKRhnW0pCMWAO8_YvB5DMt5bE5nK47q8i-iu1xTBMZx6Gx_Tx5XYL2I");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-2">
+<h1 class="text-4xl font-black text-slate-900 dark:text-slate-100 tracking-tight">STEAM Calendar</h1>
+<p class="text-slate-600 dark:text-slate-400 max-w-lg">Explore and book robotics, science, and technology workshops designed for the leaders of the future.</p>
+</div>
+<div class="flex bg-white dark:bg-slate-800 p-1.5 rounded-full shadow-sm border border-primary/10">
+<button class="px-6 py-2 rounded-full text-sm font-semibold text-slate-500 dark:text-slate-400 hover:bg-primary/5 transition-all">Previous month</button>
+<button class="px-6 py-2 rounded-full text-sm font-semibold bg-primary text-white shadow-lg shadow-primary/25">Current month</button>
+<button class="px-6 py-2 rounded-full text-sm font-semibold text-slate-500 dark:text-slate-400 hover:bg-primary/5 transition-all">Next month</button>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+<div class="xl:col-span-8 space-y-4">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl shadow-primary/5 border border-primary/10 overflow-hidden">
+<div class="flex items-center justify-between p-6 border-b border-primary/5">
+<button class="p-2 hover:bg-primary/5 rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<h3 class="text-xl font-bold text-slate-800 dark:text-slate-200">October 2023</h3>
+<button class="p-2 hover:bg-primary/5 rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-7 border-b border-primary/5 bg-slate-50/50 dark:bg-slate-800/50">
+<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Sun</div>
+<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Mon</div>
+<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Tue</div>
+<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Wed</div>
+<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Thu</div>
+<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Fri</div>
+<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Sat</div>
+</div>
+<div class="grid grid-cols-7 auto-rows-fr">
+<div class="aspect-square border-r border-b border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative group cursor-pointer hover:bg-primary/5 transition-colors">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">1</span>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</div>
+</div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">2</span>
+</div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">3</span>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+</div>
+<div class="aspect-square border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">4</span>
+</div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 bg-primary/10 relative cursor-pointer ring-2 ring-inset ring-primary">
+<span class="text-sm font-bold text-primary">5</span>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+</div>
+</div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">6</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">7</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">8</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">9</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">10</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">11</span></div>
+<div class="aspect-square border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">12</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">13</span>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+</div>
+</div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">14</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">15</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">16</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">17</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">18</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">19</span></div>
+<div class="aspect-square border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">20</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">21</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">22</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">23</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">24</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">25</span></div>
+<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">26</span></div>
+<div class="aspect-square border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">27</span></div>
+<div class="aspect-square border-r border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">28</span></div>
+<div class="aspect-square border-r border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">29</span></div>
+<div class="aspect-square border-r border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">30</span></div>
+<div class="aspect-square border-r border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">31</span></div>
+<div class="aspect-square border-r border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
+<div class="aspect-square border-r border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
+<div class="aspect-square p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
+</div>
+</div>
+<div class="flex flex-wrap gap-6 items-center pt-2">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-medium text-slate-500 uppercase">Robotics</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-xs font-medium text-slate-500 uppercase">Science</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-accent"></span>
+<span class="text-xs font-medium text-slate-500 uppercase">Technology</span>
+</div>
+</div>
+</div>
+<div class="xl:col-span-4 space-y-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl shadow-primary/5 border border-primary/10 p-6 flex flex-col h-full">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Events of the Day</h2>
+<span class="bg-primary/10 text-primary text-sm font-bold px-3 py-1 rounded-full">5 Oct</span>
+</div>
+<div class="space-y-4 overflow-y-auto max-h-[600px] pr-2">
+<div class="p-4 rounded-xl border border-primary/10 bg-primary/5 hover:bg-primary/10 transition-all border-l-4 border-l-primary">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-slate-800 dark:text-slate-200">Basic Robotics Workshop</h4>
+<span class="material-symbols-outlined text-primary text-xl">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1 mb-4">
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>10:00 AM - 12:00 PM</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-base">videocam</span>
+<span>Online (Zoom)</span>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-white font-bold rounded-lg hover:brightness-110 transition-all text-sm">Book my spot</button>
+</div>
+<div class="p-4 rounded-xl border border-accent/10 bg-accent/5 hover:bg-accent/10 transition-all border-l-4 border-l-accent">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-slate-800 dark:text-slate-200">Intro to Web Programming</h4>
+<span class="material-symbols-outlined text-accent text-xl">code</span>
+</div>
+<div class="flex flex-col gap-1 mb-4">
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>03:00 PM - 05:00 PM</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-base">location_on</span>
+<span>STEAM Hub - Madrid</span>
+</div>
+</div>
+<button class="w-full py-2.5 bg-accent text-white font-bold rounded-lg hover:brightness-110 transition-all text-sm">Book my spot</button>
+</div>
+<div class="p-4 rounded-xl border border-secondary/10 bg-secondary/5 hover:bg-secondary/10 transition-all border-l-4 border-l-secondary">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-slate-800 dark:text-slate-200">Energy Lab</h4>
+<span class="material-symbols-outlined text-secondary text-xl">bolt</span>
+</div>
+<div class="flex flex-col gap-1 mb-4">
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>06:00 PM - 07:30 PM</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-base">videocam</span>
+<span>Online (Meet)</span>
+</div>
+</div>
+<button class="w-full py-2.5 bg-secondary text-white font-bold rounded-lg hover:brightness-110 transition-all text-sm">Book my spot</button>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-primary/5">
+<div class="bg-gradient-to-br from-primary to-accent p-4 rounded-xl text-white">
+<p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Coming Soon</p>
+<h5 class="font-bold text-lg mb-2 leading-tight">Annual STEAM Festival</h5>
+<p class="text-xs mb-3 opacity-90 leading-relaxed">Join the largest celebration of innovation for girls in LATAM.</p>
+<a class="text-xs font-bold underline" href="#">Learn more</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-white dark:bg-background-dark border-t border-primary/10 py-10 mt-12 px-10">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3 text-primary grayscale opacity-50">
+<span class="material-symbols-outlined text-2xl">storm</span>
+<span class="font-bold text-slate-800 dark:text-slate-200">TEEN4STEAM</span>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">Privacy</a>
+<a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">Terms</a>
+<a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">Contact</a>
+</div>
+<div class="flex gap-4">
+<a class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-lg">share</span>
+</a>
+<a class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-lg">star</span>
+</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

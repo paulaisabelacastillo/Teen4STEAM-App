@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Live Reels | TEEN4STEAM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#da237b",
+                        "secondary": "#4a1a79",
+                        "accent": "#ef972c",
+                        "neutral-light": "#ffffff",
+                        "text-main": "#1e293b",
+                        "text-muted": "#64748b"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fff1f2;
+            color: #1e293b;
+        }
+        .soft-shadow {
+            box-shadow: 0 20px 40px -15px rgba(74, 26, 121, 0.12);
+        }
+        .instagram-card {
+            @apply relative bg-white rounded-[2rem] overflow-hidden transition-all duration-500 border-2 border-rose-50 flex flex-col h-full shadow-sm;
+        }
+        .instagram-card:hover {
+            transform: translateY(-10px);
+            @apply border-primary/20;
+            box-shadow: 0 30px 60px -20px rgba(218, 35, 123, 0.15);
+        }
+        /* Gradiente para simular el borde de storie de Instagram */
+        .insta-story-border {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        /* Ajuste para que el iframe de Instagram no se corte */
+        .instagram-media {
+            min-width: 100% !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+        }
+    </style>
+</head>
+<body class="bg-[#fff1f2]">
+
+<nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+        <a href="home.html" class="flex items-center gap-2 group shrink-0 text-decoration-none">
+            <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+                <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+            </div>
+            <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+                TEEN<span class="text-rose-500">4</span>STEAM
+            </span>
+        </a>
+       <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+            <a class="px-2 py-2 text-[12px] font-bold text-rose-600" href="voices.html">Voices</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">ULearn</a>
+            
+            <a class="px-2 py-2 text-[12px] font-black text-slate-900 hover:text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+                Our Playground
+            </a>
+        </div>
+        <div class="flex items-center gap-4 shrink-0">
+            <div class="relative group hidden md:block">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+                    <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+                    <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text"/>
+                </div>
+            </div>
+            <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+                <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                </div>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-6 py-16">
+    
+    <div class="mb-12 text-center">
+        <h1 class="text-5xl md:text-7xl font-black text-secondary tracking-tighter leading-none mb-6">
+            TEEN4STEAM <span class="text-primary italic">Live</span>
+        </h1>
+        <p class="text-text-muted text-xl font-medium tracking-tight max-w-3xl mx-auto leading-relaxed">
+            Catch up on our latest adventures, quick tips, and behind-the-scenes moments. <span class="text-secondary font-bold">Watch directly below</span> or tap to view on Instagram.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10">
+        
+        <div class="instagram-card group">
+            <div class="p-5 flex items-center justify-between border-b border-rose-50">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full p-0.5 insta-story-border">
+                        <img src="img/logo.png" class="w-full h-full rounded-full object-cover border-2 border-white bg-white">
+                    </div>
+                    <div>
+                        <p class="font-bold text-sm text-secondary">teen4steam</p>
+                        <p class="text-xs text-text-muted">Original Reel</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-text-muted">more_horiz</span>
+            </div>
+
+            <div class="relative w-full overflow-hidden bg-black" style="padding-top: 177.77%;"> <iframe 
+                    class="absolute inset-0 w-full h-full"
+                    src="https://www.instagram.com/reel/DLqrAw5xDqq/embed" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowtransparency="true" 
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                </iframe>
+            </div>
+
+            <div class="p-6 mt-auto border-t border-rose-50">
+                <a href="https://www.instagram.com/reel/DLqrAw5xDqq/" target="_blank" class="w-full bg-secondary hover:bg-primary text-white font-black text-[10px] uppercase tracking-widest py-3 rounded-xl flex items-center justify-center gap-2 transition-all">
+                    View on Instagram <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="instagram-card group">
+            <div class="p-5 flex items-center justify-between border-b border-rose-50">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full p-0.5 insta-story-border">
+                        <img src="img/logo.png" class="w-full h-full rounded-full object-cover border-2 border-white bg-white">
+                    </div>
+                    <div>
+                        <p class="font-bold text-sm text-secondary">teen4steam</p>
+                        <p class="text-xs text-text-muted">Collab Reel</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-text-muted">more_horiz</span>
+            </div>
+
+            <div class="relative w-full overflow-hidden bg-black" style="padding-top: 177.77%;"> <iframe 
+                    class="absolute inset-0 w-full h-full"
+                    src="https://www.instagram.com/reel/DTlqfp_kYHE/embed" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowtransparency="true" 
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                </iframe>
+            </div>
+
+            <div class="p-6 mt-auto border-t border-rose-50">
+                <a href="https://www.instagram.com/reel/DTlqfp_kYHE/" target="_blank" class="w-full bg-secondary hover:bg-primary text-white font-black text-[10px] uppercase tracking-widest py-3 rounded-xl flex items-center justify-center gap-2 transition-all">
+                    View on Instagram <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">
+                    Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.
+                </p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>
+                    </a>
+                    <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#833AB4] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm cursor-default" title="TikTok (Próximamente)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                    </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Playground</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
