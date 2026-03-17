@@ -173,19 +173,41 @@
         const loadingMsg = addMessage('bot', 'Analyzing data... 🚀');
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/ask', {
+            // Llamada directa a OpenAI desde el navegador
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: message })
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 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'
+                },
+                body: JSON.stringify({
+                    model: "gpt-4o-mini",
+                    messages: [
+                        {
+                            role: "system",
+                            content: "You are My Tutor AI, a professional STEAM mentor for teens (12-18). Respond in ONE SINGLE SOLID BLOCK of text (no paragraphs). Length: 3-5 lines. Mirror the user's language. End with exactly 2 emojis."
+                        },
+                        {
+                            role: "user",
+                            content: message
+                        }
+                    ],
+                    temperature: 0.7
+                })
             });
             
             const data = await response.json();
+            
+            if (data.error) {
+                throw new Error(data.error.message);
+            }
+
             loadingMsg.remove(); 
-            addMessage('bot', data.answer);
+            addMessage('bot', data.choices[0].message.content);
 
         } catch (error) {
             loadingMsg.remove();
-            addMessage('bot', "Oops! My STEAM circuits are currently offline. 💤\n\nPlease make sure the server is running so we can continue exploring together! ✨");
+            addMessage('bot', "Oops! My STEAM circuits are currently offline. 💤");
         }
     }
 
