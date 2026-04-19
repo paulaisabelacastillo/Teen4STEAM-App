@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Math Magic Castle</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI';
+  overflow:hidden;
+}
+
+/* FONDO */
+#castle{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  background:url("img/castillo.jpeg") center/cover no-repeat;
+}
+
+/* ZONAS */
+.area{
+  position:absolute;
+  cursor:pointer;
+  border-radius:12px;
+
+  /* SOLO PARA AJUSTAR (luego lo quitas) */
+  background:rgba(255,255,255,0.15);
+  border:2px dashed white;
+}
+
+.area:hover{
+  background:rgba(255,255,255,0.3);
+}
+
+/* MODAL */
+#room{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,0.8);
+}
+
+#roomContent{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  width:320px;
+}
+
+/* BOTONES */
+button{
+  padding:8px 12px;
+  margin:5px;
+  border:none;
+  border-radius:8px;
+  background:#ff7eb3;
+  color:white;
+  cursor:pointer;
+}
+
+input{
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<div id="castle">
+
+  <!-- 🟣 GEOMETRÍA -->
+  <div class="area" style="left:22%; top:38%; width:14%; height:20%;" onclick="openRoom('geo')"></div>
+
+  <!-- 🟣 FRACCIONES -->
+  <div class="area" style="left:64%; top:38%; width:14%; height:20%;" onclick="openRoom('frac')"></div>
+
+  <!-- ➕ OPERACIONES -->
+  <div class="area" style="left:23%; top:60%; width:12%; height:18%;" onclick="openRoom('op')"></div>
+
+  <!-- ❓ RETOS -->
+  <div class="area" style="left:66%; top:60%; width:12%; height:18%;" onclick="openRoom('retos')"></div>
+
+  <!-- 🚪 PUERTA CENTRAL -->
+  <div class="area" style="left:40%; top:48%; width:20%; height:35%;" onclick="openRoom('puerta')"></div>
+
+</div>
+
+<!-- MODAL -->
+<div id="room">
+  <div id="roomContent"></div>
+</div>
+
+<script>
+let correctAnswer = 0;
+
+function openRoom(tipo){
+
+  let question = "";
+
+  if(tipo==="puerta"){
+    question="7 + 5";
+    correctAnswer=12;
+  }
+
+  if(tipo==="geo"){
+    question="¿Cuántos lados tiene un triángulo?";
+    correctAnswer=3;
+  }
+
+  if(tipo==="frac"){
+    question="1/2 + 1/2";
+    correctAnswer=1;
+  }
+
+  if(tipo==="op"){
+    question="9 × 2";
+    correctAnswer=18;
+  }
+
+  if(tipo==="retos"){
+    question="15 ÷ 3";
+    correctAnswer=5;
+  }
+
+  document.getElementById("roomContent").innerHTML=`
+    <h2>✨ Reto Matemágico</h2>
+    <p>${question} = ?</p>
+    <input id="answer" type="number" placeholder="Tu respuesta">
+    <br><br>
+    <button onclick="check()">Responder</button>
+    <button onclick="closeRoom()">Cerrar</button>
+    <p id="result"></p>
+  `;
+
+  document.getElementById("room").style.display="flex";
+}
+
+function check(){
+  const val = document.getElementById("answer").value;
+
+  if(val == correctAnswer){
+    document.getElementById("result").innerHTML="✅ Correcto 🎉";
+  } else {
+    document.getElementById("result").innerHTML="❌ Intenta otra vez";
+  }
+}
+
+function closeRoom(){
+  document.getElementById("room").style.display="none";
+}
+</script>
+
+</body>
+</html>

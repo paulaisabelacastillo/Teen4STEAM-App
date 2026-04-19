@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Creative Engineering | TEEN4STEAM</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#da237b",
+            secondary: "#4a1a79",
+            accent: "#ef972c",
+            "text-muted": "#64748b"
+          },
+          fontFamily: {
+            display: ["Plus Jakarta Sans", "sans-serif"]
+          },
+        },
+      },
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg,#ff4f7b,#7b34d8,#ffae00);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes gradientMove{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* CONTENEDOR DEL JUEGO */
+    #game-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      color: white;
+    }
+
+    #topBar {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .status-box {
+      background: white;
+      color: #4a1a79;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .score-box {
+      background: #4a1a79;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 14px;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .game-btn {
+      @apply px-6 py-2 rounded-full bg-primary text-white font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-lg;
+    }
+
+    #workspace {
+      display: flex;
+      width: 100%;
+      max-width: 1100px;
+      height: 55vh;
+      gap: 20px;
+    }
+
+    #toolbox {
+      width: 100px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 25px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    #canvas {
+      flex: 1;
+      background: white;
+      border-radius: 25px;
+      position: relative;
+      overflow: hidden;
+      touch-action: none;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    /* SHAPES */
+    .shape { cursor: pointer; transition: transform 0.2s; }
+    .shape:hover { transform: scale(1.1); }
+
+    .square { width: 45px; height: 45px; background: #6c63ff; border-radius: 8px; }
+    .rectangle { width: 65px; height: 30px; background: #da237b; border-radius: 8px; }
+    .circle { width: 45px; height: 45px; border-radius: 50%; background: #00c2ff; }
+    .triangle {
+      width: 0; height: 0;
+      border-left: 22px solid transparent;
+      border-right: 22px solid transparent;
+      border-bottom: 45px solid #ff914d;
+    }
+    .platform { width: 70px; height: 15px; background: #4ade80; border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+  <nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+
+      <a href="home.html" class="flex items-center gap-2 group shrink-0">
+        <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+          <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+        </div>
+        <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+          TEEN<span class="text-rose-500">4</span>STEAM
+        </span>
+      </a>
+
+      <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="ulearn.html">ULearn</a>
+
+        <a class="px-2 py-2 text-[12px] font-black text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+          Our Playground
+        </a>
+      </div>
+
+      <div class="flex items-center gap-4 shrink-0">
+        <div class="relative group hidden md:block">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+          <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+            <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+            <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text" />
+          </div>
+        </div>
+
+        <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+          <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+          </div>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="game-container">
+    <h1 class="text-3xl font-black mb-6 uppercase tracking-tighter">🚀 Creative Engineering</h1>
+
+    <div id="topBar">
+      <div id="missionBox" class="status-box">🎯 Choose your mission to start</div>
+      <div id="scoreBox" class="score-box">⭐ Points: 0 / 25</div>
+      <button class="game-btn" onclick="chooseMission()">New Mission</button>
+      <button class="game-btn bg-secondary" onclick="undo()">↩ Undo</button>
+    </div>
+
+    <div id="workspace">
+      <div id="toolbox">
+        <div class="shape square" title="Square"></div>
+        <div class="shape rectangle" title="Rectangle"></div>
+        <div class="shape circle" title="Circle"></div>
+        <div class="shape triangle" title="Triangle"></div>
+        <div class="shape platform" title="Platform"></div>
+      </div>
+      <div id="canvas"></div>
+    </div>
+  </main>
+
+  <footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.</p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                    <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary cursor-default"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="ulearn.html">ULearn</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Our Playground</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  <script>
+    let score = 0;
+    let gameStarted = false;
+    let shapesCreated = [];
+
+    const missions = [
+      "Design a robot that cleans the ocean 🌊",
+      "Create a vehicle to explore Mars 🚀",
+      "Build an eco-friendly city 🌱",
+      "Design a machine to filter water 💧",
+      "Create a hurricane-resistant structure 🌪️",
+      "Invent a device for hospitals 🏥"
+    ];
+
+    function chooseMission(){
+      const random = Math.floor(Math.random()*missions.length);
+      document.getElementById("missionBox").innerHTML = "🎯 MISSION: " + missions[random];
+      gameStarted = true;
+    }
+
+    function updateScore(){
+      document.getElementById("scoreBox").innerHTML = "⭐ Points: " + score + " / 25";
+    }
+
+    function undo(){
+      if(shapesCreated.length > 0){
+        const lastShape = shapesCreated.pop();
+        lastShape.remove();
+        score--;
+        updateScore();
+      }
+    }
+
+    const toolboxShapes = document.querySelectorAll(".shape");
+    const canvas = document.getElementById("canvas");
+
+    toolboxShapes.forEach(shape=>{
+      shape.addEventListener("pointerdown", ()=>{
+        if(!gameStarted) return;
+        if(score >= 25) return;
+
+        const newShape = shape.cloneNode(true);
+        newShape.style.position = "absolute";
+        newShape.style.left = "50px";
+        newShape.style.top = "50px";
+        canvas.appendChild(newShape);
+
+        shapesCreated.push(newShape);
+        score++;
+        updateScore();
+        enableDrag(newShape);
+      });
+    });
+
+    function enableDrag(element){
+      let offsetX, offsetY;
+      element.addEventListener("pointerdown", (e)=>{
+        e.preventDefault();
+        element.setPointerCapture(e.pointerId);
+        const rect = element.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+
+        function moveHandler(ev){
+          let x = ev.clientX - canvasRect.left - offsetX;
+          let y = ev.clientY - canvasRect.top - offsetY;
+          element.style.left = x + "px";
+          element.style.top = y + "px";
+        }
+
+        function upHandler(ev){
+          element.releasePointerCapture(ev.pointerId);
+          element.removeEventListener("pointermove", moveHandler);
+          element.removeEventListener("pointerup", upHandler);
+        }
+        element.addEventListener("pointermove", moveHandler);
+        element.addEventListener("pointerup", upHandler);
+      });
+    }
+  </script>
+</body>
+</html>

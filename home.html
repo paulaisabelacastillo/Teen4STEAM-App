@@ -80,7 +80,7 @@
             <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
             <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
             <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
-            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">ULearn</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="ulearn.html">ULearn</a>
             
             <a class="px-2 py-2 text-[12px] font-black text-slate-900 hover:text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
                 Our Playground
@@ -88,23 +88,17 @@
         </div>
 
         <div class="flex items-center gap-4 shrink-0">
-            
             <div class="relative group hidden md:block">
                 <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-                
                 <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
                     <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
-                    <input 
-                        class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" 
-                        placeholder="Explorar" 
-                        type="text"
-                    />
+                    <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text"/>
                 </div>
             </div>
 
-            <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+            <button id="navProfileBtn" class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
                 <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                    <img id="navProfilePic" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
                 </div>
             </button>
         </div>
@@ -161,7 +155,7 @@
                 </div>
                 <h3 class="text-2xl font-bold mb-4 text-secondary">Our Mission</h3>
                 <p class="text-text-muted leading-relaxed text-lg relative z-10">
-                    We want every girl in the world to know she can be an expert in technology and science. We use games and AI to make learning fun and to break down every barrier in our way. At Teen4STEM, we help you believe in yourself so you can become the engineer, scientist, or innovator the world needs.
+                    We want every girl in the world to know she can be an expert in technology and science. We use games and AI to make learning fun and to break down every barrier in our way. At Teen4STEAM, we help you believe in yourself so you can become the engineer, scientist, or innovator the world needs.
                 </p>
             </div>
             <div class="p-10 rounded-[2rem] bg-white border-2 border-rose-50 hover:border-secondary/20 transition-all soft-shadow relative overflow-hidden group">
@@ -326,7 +320,7 @@
             <span class="text-text-muted text-xs font-bold bg-rose-50 px-2 py-1 rounded uppercase tracking-tighter">MAR 08</span>
         </div>
         <h4 class="font-bold text-xl mb-2 text-secondary group-hover:text-accent transition-colors">International Women's Day</h4>
-        <p class="text-text-muted text-sm mb-6 leading-relaxed">Join Teen4STEM's special celebration to honor female talent and leadership.</p>
+        <p class="text-text-muted text-sm mb-6 leading-relaxed">Join Teen4STEAM's special celebration to honor female talent and leadership.</p>
         
         <button class="w-full py-4 bg-rose-50 text-secondary border border-rose-100 rounded-2xl text-sm font-bold hover:bg-accent hover:text-white transition-all active:scale-95">
             Schedule Event
@@ -398,32 +392,37 @@
     <div class="flex flex-col items-center text-center mb-12">
         <h2 class="text-3xl font-extrabold text-secondary mb-16">Nuestros Aliados</h2>
     
-        <div class="max-w-6xl w-full px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 items-center justify-items-center">
+        <div class="max-w-screen-xl w-full px-4">
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-12 items-center">
                 
-                <div class="flex items-center justify-center w-full h-40">
+                <div class="flex items-center justify-center w-48 h-40">
                     <img src="img/techno.png" alt="Technovation Girls" class="max-h-full max-w-full object-contain">
                 </div>
-                <div class="flex items-center justify-center w-full h-40">
+                <div class="flex items-center justify-center w-48 h-40">
                     <img src="img/senacyt.png" alt="Senacyt" class="max-h-full max-w-full object-contain">
                 </div>
-                <div class="flex items-center justify-center w-full h-40">
+                <div class="flex items-center justify-center w-48 h-40">
                     <img src="img/rch.png" alt="Rincon Clubhouse" class="max-h-full max-w-full object-contain transform scale-125">
                 </div>
-                <div class="flex items-center justify-center w-full h-40">
+                <div class="flex items-center justify-center w-48 h-40">
                     <img src="img/rincones.png" alt="Rincones" class="max-h-full max-w-full object-contain">
                 </div>
-
-                <div class="flex items-center justify-center w-full h-40">
+                <div class="flex items-center justify-center w-48 h-40">
                     <img src="img/explora.png" alt="Museo Explora" class="max-h-full max-w-full object-contain transform scale-110">
                 </div>
-                <div class="flex items-center justify-center w-full h-40">
+
+                <div class="flex items-center justify-center w-48 h-40">
                     <img src="img/wit.png" alt="Women in Tech" class="max-h-full max-w-full object-contain transform scale-110">
                 </div>
-                <div class="flex items-center justify-center w-full h-40">
+                
+                <div class="flex items-center justify-center w-48 h-40">
+                    <img src="img/uo.png" alt="UO" class="max-h-full max-w-full object-contain" style="filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));">
+                </div>
+
+                <div class="flex items-center justify-center w-48 h-40">
                     <img src="img/innova.png" alt="InnovaNation" class="max-h-full max-w-full object-contain">
                 </div>
-                <div class="flex items-center justify-center w-full h-40">
+                <div class="flex items-center justify-center w-48 h-40">
                     <img src="img/genius.png" alt="STEAM Genius" class="max-h-full max-w-full object-contain">
                 </div>
 
@@ -443,28 +442,11 @@
                     </div>
                     <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
                 </div>
-                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">
-                    Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.
-                </p>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.</p>
                 <div class="flex gap-4 mt-8">
-                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm" title="Follow us on Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                    </a>
-                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm" title="Subscribe on YouTube">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path>
-                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
-                        </svg>
-                    </a>
-                   <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#833AB4] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm cursor-default" title="TikTok (Próximamente)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-                    </svg>
-                    </a>
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                    <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary cursor-default"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
                 </div>
             </div>
 
@@ -474,20 +456,19 @@
                     <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
                     <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
                     <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
                 </ul>
                 <ul class="space-y-4 text-sm text-text-muted font-bold">
                     <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
                     <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="signup.html">Playground</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="ulearn.html">ULearn</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Our Playground</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
-            <p class="text-text-muted text-xs font-black tracking-widest uppercase">
-                © TEEN4STEAM
-            </p>
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
             <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
                 <a href="#" class="hover:text-secondary">Privacy</a>
                 <a href="#" class="hover:text-secondary">Terms</a>
@@ -495,6 +476,45 @@
         </div>
     </div>
 </footer>
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBtJZ9-pjUmppxctfee3uGX2aADL8D9evk",
+        authDomain: "login-steam-educ.firebaseapp.com",
+        projectId: "login-steam-educ",
+        storageBucket: "login-steam-educ.firebasestorage.app",
+        messagingSenderId: "914739570610",
+        appId: "1:914739570610:web:3c3bc621ed7fc888a2a6ab"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    onAuthStateChanged(auth, async (user) => {
+        const profileBtn = document.getElementById("navProfileBtn");
+        const profileImg = document.getElementById("navProfilePic");
+
+        if (user) {
+            profileBtn.onclick = () => window.location.href = 'perfil.html';
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
+            
+            if (userSnap.exists() && userSnap.data().photoURL) {
+                profileImg.src = userSnap.data().photoURL;
+            } else {
+                profileImg.src = `https://ui-avatars.com/api/?name=${user.email}&background=da237b&color=fff`;
+            }
+        } else {
+            profileBtn.onclick = () => window.location.href = 'signup.html';
+        }
+    });
+</script>
 
 </body>
 </html>

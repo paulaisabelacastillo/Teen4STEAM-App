@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Community | TEEN4STEAM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#da237b",
+                        "secondary": "#4a1a79",
+                        "accent": "#ef972c",
+                        "steam-c": "#63C36A",
+                        "steam-t": "#E8A23E",
+                        "steam-e": "#B682E8",
+                        "steam-a": "#D951C8",
+                        "steam-m": "#58B1D4",
+                        "text-main": "#1e293b",
+                        "text-muted": "#64748b"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fff1f2; scroll-behavior: smooth; }
+        .soft-shadow { box-shadow: 0 10px 30px -10px rgba(74, 26, 121, 0.08); }
+        .modal-active { display: flex !important; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #da237b; border-radius: 10px; }
+        .hero-overlay { background: linear-gradient(to bottom, rgba(74, 26, 121, 0.85), rgba(218, 35, 123, 0.5)); }
+    </style>
+</head>
+<body class="bg-[#fff1f2]">
+
+
+<nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+        
+        <a href="home.html" class="flex items-center gap-2 group shrink-0">
+            <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+                <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+            </div>
+            <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+                TEEN<span class="text-rose-500">4</span>STEAM
+            </span>
+        </a>
+
+        <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+            <a class="px-2 py-2 text-[12px] font-bold text-rose-600" href="community.html">Community</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xpierence</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="ulearn.html">ULearn</a>
+            
+            <a class="px-2 py-2 text-[12px] font-black text-slate-900 hover:text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+                Our Playground
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4 shrink-0">
+            
+            <div class="relative group hidden md:block">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                
+                <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+                    <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+                    <input 
+                        class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" 
+                        placeholder="Explorar" 
+                        type="text"
+                    />
+                </div>
+            </div>
+
+            <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+                <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                </div>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<header class="relative bg-secondary overflow-hidden py-32 px-6 min-h-[500px] flex items-center">
+    <div class="absolute inset-0 z-0 bg-cover bg-center opacity-60" style="background-image: url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80');"></div>
+    <div class="absolute inset-0 z-1 hero-overlay"></div>
+    <div class="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center gap-8">
+        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1 rounded-full text-white font-bold text-[10px] uppercase tracking-widest">
+            <span class="material-symbols-outlined text-xs">diversity_1</span> SAFE & ANONYMOUS
+        </div>
+        <h1 class="text-5xl md:text-8xl font-extrabold text-white leading-tight">
+            The <span class="text-accent italic">Community</span>
+        </h1>
+        <p class="text-white text-xl max-w-2xl font-medium">
+            Empowering the next generation of girls in STEAM. Share your thoughts, projects, and questions.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center mt-4">
+            <a href="#explore-sections" class="bg-white text-secondary px-10 py-5 rounded-2xl font-bold hover:scale-105 transition shadow-2xl">Explore Sections</a>
+            <button onclick="window.toggleModal('postModal')" class="bg-primary text-white px-10 py-5 rounded-2xl font-bold hover:scale-105 transition shadow-xl shadow-primary/30">New Thread</button>
+        </div>
+    </div>
+</header>
+
+<section id="explore-sections" class="py-24 px-6 bg-white border-b border-rose-50">
+    <div class="max-w-7xl mx-auto text-center">
+        <h2 class="text-3xl font-black text-secondary mb-4 italic">Choose a Category</h2>
+        <p class="text-text-muted mb-16 font-medium">Select a section to dive into specific STEAM topics.</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            <button onclick="window.filterBy('ALL')" class="flex flex-col items-center p-8 bg-rose-50 rounded-[2.5rem] hover:bg-rose-100 transition border border-rose-100 group">
+                <span class="material-symbols-outlined text-rose-500 mb-3 text-4xl group-hover:scale-110 transition">grid_view</span>
+                <span class="text-[10px] font-black uppercase text-secondary tracking-widest">All</span>
+            </button>
+            <button onclick="window.filterBy('SCIENCE')" class="flex flex-col items-center p-8 bg-green-50 rounded-[2.5rem] hover:bg-green-100 transition border border-green-100 group">
+                <span class="material-symbols-outlined text-steam-c mb-3 text-4xl group-hover:scale-110 transition">science</span>
+                <span class="text-[10px] font-black uppercase text-secondary tracking-widest">Science</span>
+            </button>
+            <button onclick="window.filterBy('TECHNOLOGY')" class="flex flex-col items-center p-8 bg-orange-50 rounded-[2.5rem] hover:bg-orange-100 transition border border-orange-100 group">
+                <span class="material-symbols-outlined text-steam-t mb-3 text-4xl group-hover:scale-110 transition">code</span>
+                <span class="text-[10px] font-black uppercase text-secondary tracking-widest">Tech</span>
+            </button>
+            <button onclick="window.filterBy('ENGINEERING')" class="flex flex-col items-center p-8 bg-purple-50 rounded-[2.5rem] hover:bg-purple-100 transition border border-purple-100 group">
+                <span class="material-symbols-outlined text-steam-e mb-3 text-4xl group-hover:scale-110 transition">precision_manufacturing</span>
+                <span class="text-[10px] font-black uppercase text-secondary tracking-widest">Eng</span>
+            </button>
+            <button onclick="window.filterBy('ART')" class="flex flex-col items-center p-8 bg-pink-50 rounded-[2.5rem] hover:bg-pink-100 transition border border-pink-100 group">
+                <span class="material-symbols-outlined text-steam-a mb-3 text-4xl group-hover:scale-110 transition">palette</span>
+                <span class="text-[10px] font-black uppercase text-secondary tracking-widest">Art</span>
+            </button>
+            <button onclick="window.filterBy('MATH')" class="flex flex-col items-center p-8 bg-blue-50 rounded-[2.5rem] hover:bg-blue-100 transition border border-blue-100 group">
+                <span class="material-symbols-outlined text-steam-m mb-3 text-4xl group-hover:scale-110 transition">calculate</span>
+                <span class="text-[10px] font-black uppercase text-secondary tracking-widest">Math</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<main id="forum-feed" class="max-w-4xl mx-auto px-6 py-20 min-h-screen">
+    <div class="flex items-center justify-between mb-12 border-b border-rose-100 pb-8">
+        <h2 id="feedTitle" class="text-4xl font-black text-secondary italic tracking-tight">Recent Activity</h2>
+    </div>
+    <div id="forumFeed" class="space-y-12">
+        </div>
+</main>
+
+
+
+<footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.</p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                    <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary cursor-default"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="ulearn.html">ULearn</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Our Playground</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<div id="postModal" class="fixed inset-0 bg-secondary/90 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-[2.5rem] p-10 shadow-2xl">
+        <h2 class="text-2xl font-black text-secondary mb-6 italic">New Discussion</h2>
+        <div class="space-y-4 text-left">
+            <select id="postCat" class="w-full p-4 rounded-2xl border-none bg-rose-50 text-secondary font-bold focus:ring-2 focus:ring-primary">
+                <option value="SCIENCE">Science</option>
+                <option value="TECHNOLOGY">Technology</option>
+                <option value="ENGINEERING">Engineering</option>
+                <option value="ART">Art</option>
+                <option value="MATH">Math</option>
+            </select>
+            <input id="postTitle" type="text" placeholder="Title" class="w-full p-4 rounded-2xl border-none bg-rose-50 outline-none">
+            <textarea id="postContent" rows="4" placeholder="Description..." class="w-full p-4 rounded-2xl border-none bg-rose-50 outline-none"></textarea>
+            <div class="flex gap-4 pt-4">
+                <button onclick="window.toggleModal('postModal')" class="flex-1 font-bold text-slate-400">Cancel</button>
+                <button onclick="window.savePost()" class="flex-1 py-4 bg-primary text-white rounded-2xl font-bold shadow-lg">Post Thread</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, where, updateDoc, doc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBtJZ9-pjUmppxctfee3uGX2aADL8D9evk",
+        authDomain: "login-steam-educ.firebaseapp.com",
+        projectId: "login-steam-educ",
+        storageBucket: "login-steam-educ.firebasestorage.app",
+        messagingSenderId: "914739570610",
+        appId: "1:914739570610:web:3c3bc621ed7fc888a2a6ab"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const postsRef = collection(db, "posts");
+
+    const catColors = { 'SCIENCE': 'bg-steam-c', 'TECHNOLOGY': 'bg-steam-t', 'ENGINEERING': 'bg-steam-e', 'ART': 'bg-steam-a', 'MATH': 'bg-steam-m' };
+
+    // EXPOSICIÓN GLOBAL PARA QUE EL ONCLICK FUNCIONE
+    window.toggleModal = (id) => document.getElementById(id).classList.toggle('modal-active');
+
+    window.savePost = async () => {
+        const title = document.getElementById('postTitle').value;
+        const content = document.getElementById('postContent').value;
+        const cat = document.getElementById('postCat').value;
+        if(!title || !content) return;
+        try {
+            await addDoc(postsRef, { 
+                title, content, category: cat, author: "GirlPower_" + Math.floor(Math.random()*99), comments: [], createdAt: new Date() 
+            });
+            window.toggleModal('postModal');
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postContent').value = '';
+        } catch (e) { console.error("Error saving:", e); }
+    };
+
+    window.addComment = async (postId) => {
+        const input = document.getElementById(`reply-to-${postId}`);
+        if(!input.value) return;
+        try {
+            const postRef = doc(db, "posts", postId);
+            await updateDoc(postRef, { 
+                comments: arrayUnion({ text: input.value, author: "Anonymous", time: new Date().toLocaleTimeString() }) 
+            });
+            input.value = '';
+        } catch (e) { console.error("Error replying:", e); }
+    };
+
+    window.filterBy = (filter = 'ALL') => {
+        let q = query(postsRef, orderBy("createdAt", "desc"));
+        if(filter !== 'ALL') {
+            q = query(postsRef, where("category", "==", filter));
+            document.getElementById('forum-feed').scrollIntoView({ behavior: 'smooth' });
+        }
+        document.getElementById('feedTitle').innerText = filter === 'ALL' ? 'Recent Activity' : filter + ' Discussions';
+
+        onSnapshot(q, (snapshot) => {
+            const feed = document.getElementById('forumFeed');
+            feed.innerHTML = '';
+            snapshot.docs.forEach(docSnap => {
+                const p = docSnap.data();
+                const id = docSnap.id;
+                const comments = (p.comments || []).map(c => `
+                    <div class="bg-rose-50/50 p-4 rounded-2xl text-xs mb-3 border border-rose-100/50 text-left">
+                        <p class="font-black text-secondary mb-1">@${c.author}</p>
+                        <p class="text-slate-600 font-medium">${c.text}</p>
+                    </div>
+                `).join('');
+
+                feed.innerHTML += `
+                    <div class="bg-white rounded-[2.5rem] border border-rose-100 p-10 soft-shadow text-left">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="${catColors[p.category]} text-white text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest">${p.category}</span>
+                            <span class="text-[10px] font-bold text-slate-300 uppercase tracking-widest">@${p.author} • Recently</span>
+                        </div>
+                        <h4 class="text-3xl font-black text-secondary mb-4 tracking-tight leading-tight">${p.title}</h4>
+                        <p class="text-slate-500 font-medium text-lg leading-relaxed mb-10">${p.content}</p>
+                        <div class="border-t border-rose-100 pt-8 mt-4">
+                            <h5 class="text-[10px] font-black text-primary uppercase tracking-widest mb-6 italic text-left">Opinions</h5>
+                            <div class="max-h-60 overflow-y-auto custom-scrollbar mb-8 pr-2">${comments}</div>
+                            <div class="flex gap-4 items-center bg-rose-50 rounded-3xl px-6 py-3">
+                                <input id="reply-to-${id}" class="flex-1 bg-transparent border-none focus:ring-0 text-sm font-medium placeholder:text-slate-400" placeholder="Share your opinion...">
+                                <button onclick="window.addComment('${id}')" class="w-12 h-12 bg-secondary hover:bg-primary rounded-2xl flex items-center justify-center text-white transition-all shadow-lg">
+                                    <span class="material-symbols-outlined">send</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    };
+    
+    window.filterBy();
+</script>
+
+</body>
+</html>

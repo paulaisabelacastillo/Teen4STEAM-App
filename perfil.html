@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -20,209 +20,352 @@
                         "background-light": "#fff1f2",
                         "background-dark": "#211119",
                     },
-                    fontFamily: {
-                        "display": ["Space Grotesk", "sans-serif"]
-                    },
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"] },
                     borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
                 },
             },
         }
     </script>
-<title>TEEN4STEAM User Profile &amp; Stats</title>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtJZ9-pjUmppxctfee3uGX2aADL8D9evk",
+            authDomain: "login-steam-educ.firebaseapp.com",
+            projectId: "login-steam-educ",
+            storageBucket: "login-steam-educ.firebasestorage.app",
+            messagingSenderId: "914739570610",
+            appId: "1:914739570610:web:3c3bc621ed7fc888a2a6ab"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    updateUI(userSnap.data());
+                }
+            } else {
+                window.location.href = "signup.html";
+            }
+        });
+
+        function updateUI(data) {
+            document.getElementById("displayName").innerText = data.fullName || data.email.split('@')[0];
+            document.getElementById("inputFullName").value = data.fullName || "";
+            document.getElementById("inputEmail").value = data.email || "";
+            document.getElementById("inputGender").value = data.gender || "Female";
+            
+            document.getElementById("displayPoints").innerText = data.points || 0;
+            document.getElementById("displayLevel").innerText = data.level || 0;
+            
+            const photo = data.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${data.email}`;
+            document.getElementById("mainProfilePic").style.backgroundImage = `url('${photo}')`;
+            document.getElementById("navProfilePic").src = photo;
+
+            const headerInterests = document.getElementById("headerInterests");
+            headerInterests.innerHTML = "";
+            (data.interests || []).forEach(int => {
+                headerInterests.innerHTML += `<span class="px-3 py-1 bg-brand-purple/10 text-brand-purple text-xs font-bold rounded-full uppercase tracking-wider">${int}</span>`;
+            });
+
+            renderInterestsSelector(data.interests || []);
+        }
+
+        window.saveAccountChanges = async () => {
+            const user = auth.currentUser;
+            if (!user) return;
+            try {
+                const userRef = doc(db, "users", user.uid);
+                await updateDoc(userRef, {
+                    fullName: document.getElementById("inputFullName").value,
+                    gender: document.getElementById("inputGender").value
+                });
+                alert("¡Cambios guardados con éxito!");
+                location.reload();
+            } catch (e) { alert("Error al guardar."); }
+        };
+
+        // Función para cerrar sesión
+        window.logout = async () => {
+            try {
+                await signOut(auth);
+                window.location.href = "signup.html";
+            } catch (e) {
+                alert("Error al cerrar sesión.");
+            }
+        };
+
+        window.triggerPhotoUpload = () => document.getElementById("photoInput").click();
+        
+        window.uploadPhoto = async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (file.size > 1500 * 1024) { 
+                alert("La foto es muy pesada. Usa una de menos de 1.5MB.");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const base64Photo = e.target.result;
+                const user = auth.currentUser;
+                if (user) {
+                    document.getElementById("mainProfilePic").style.backgroundImage = `url('${base64Photo}')`;
+                    document.getElementById("navProfilePic").src = base64Photo;
+                    try {
+                        const userRef = doc(db, "users", user.uid);
+                        await updateDoc(userRef, { photoURL: base64Photo });
+                    } catch (err) { console.error("Error Firebase:", err); }
+                }
+            };
+            reader.readAsDataURL(file);
+        };
+
+        function renderInterestsSelector(userInterests) {
+            const container = document.getElementById("interestsSelector");
+            container.innerHTML = "";
+            // Intereses actualizados con las siglas STEAM
+            const options = ["Science", "Technology", "Engineering", "Arts", "Mathematics"];
+            
+            options.forEach(opt => {
+                const active = userInterests.includes(opt);
+                const btn = document.createElement("div");
+                btn.className = `px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 cursor-pointer transition-all ${active ? 'bg-primary text-white' : 'bg-primary/10 text-primary border border-primary/20'}`;
+                btn.innerHTML = opt;
+                btn.onclick = () => toggleInterest(opt, active);
+                container.appendChild(btn);
+            });
+        }
+
+        async function toggleInterest(name, active) {
+            const user = auth.currentUser;
+            if (!user) return;
+            const userRef = doc(db, "users", user.uid);
+            await updateDoc(userRef, {
+                interests: active ? arrayRemove(name) : arrayUnion(name)
+            });
+            location.reload(); 
+        }
+    </script>
+    <title>TEEN4STEAM User Profile & Stats</title>
 </head>
+
 <body class="bg-background-light dark:bg-background-dark font-display text-[#1b0e14] dark:text-white transition-colors duration-300">
 <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-<div class="layout-container flex h-full grow flex-col">
-<!-- Top Navigation Bar -->
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-10 py-3 sticky top-0 z-50">
-<div class="flex items-center gap-8">
-<div class="flex items-center gap-4 text-primary">
-<div class="size-8 flex items-center justify-center">
-<span class="material-symbols-outlined text-4xl">auto_awesome</span>
-</div>
-<h2 class="text-[#1b0e14] dark:text-white text-xl font-bold leading-tight tracking-tight">TEEN4STEAM</h2>
-</div>
-<label class="flex flex-col min-w-40 !h-10 max-w-64">
-<div class="flex w-full flex-1 items-stretch rounded-xl h-full">
-<div class="text-primary/60 flex border-none bg-primary/5 dark:bg-primary/20 items-center justify-center pl-4 rounded-l-xl">
-<span class="material-symbols-outlined">search</span>
-</div>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1b0e14] dark:text-white focus:outline-0 focus:ring-0 border-none bg-primary/5 dark:bg-primary/20 placeholder:text-primary/40 px-4 rounded-l-none pl-2 text-base font-normal" placeholder="Search courses..."/>
-</div>
-</label>
-</div>
-<div class="flex flex-1 justify-end gap-8">
-<div class="flex items-center gap-9">
-<a class="text-[#1b0e14] dark:text-white text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
-<a class="text-[#1b0e14] dark:text-white text-sm font-medium hover:text-primary transition-colors" href="#">Courses</a>
-<a class="text-[#1b0e14] dark:text-white text-sm font-medium hover:text-primary transition-colors" href="#">Projects</a>
-<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Profile</a>
-</div>
-<div class="flex gap-2">
-<button class="flex cursor-pointer items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="flex cursor-pointer items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
-<span class="material-symbols-outlined">settings</span>
-</button>
-</div>
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="User profile thumbnail smiling woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCPzz2mT_yqQ6OCvfxLdM3zTfJk4gr6dEtcoWm00uqBjpbI7L1F7YwT4CeyVFp-q1VSN3EAPVDIM6E5pxo5GFrCdCd3Q-OJ5hAWljLSbjoeusp4dd1mIVvUGq9WRMpVAwR_g5GsGlFoitewTR19l7uk_YY2d3DlFZwUn8MpJogybMWWPzajGMwBCUGaViqzP-lgOskd8lJpDzcdCi5PxiJhujS0jhWw6AlsPCU5rFsuC3rJKbMcXRQPagGn1iaAyYChJUC6ELr5gok");'></div>
-</div>
-</header>
-<main class="flex flex-1 justify-center py-10 px-4">
-<div class="layout-content-container flex flex-col max-w-[1000px] flex-1 gap-6">
-<!-- Profile Header Card -->
-<div class="relative bg-white dark:bg-[#2d1822] p-8 rounded-xl shadow-xl border-t-4 border-primary overflow-hidden">
-<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16"></div>
-<div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
-<div class="relative">
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-32 ring-4 ring-primary/10" data-alt="Main user profile picture of Sarah Jenkins" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCPEcS7OrxHWDgCWR2wsOBCdgFPFfx0wV4aWrfzua1hhAO_Nl3omJAz8kglJGuKC4gzK4R1yEiE1NfJPDVQco068QQG30GKi5_gYu9KO6iXy2JynRq-4MiRaeC6hnGnNxZIfeK6KoFsJBMqYq-UJBQ8K0ruyqlkzX8Fkyuhu6XFp12GF6CkYMvAGnzLMc2s56GCj2k1OCm4Nth7GGSXJFiKMc2RyOqV3qSaCJyVycu8HQXTvoH268y7d3I00xZvC7wlOYzi5K2vHoI");'></div>
-<button class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-lg border-2 border-white dark:border-[#2d1822] hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-sm">edit</span>
-</button>
-</div>
-<div class="flex flex-col items-center md:items-start text-center md:text-left">
-<h1 class="text-3xl font-bold text-[#1b0e14] dark:text-white">Sarah Jenkins</h1>
-<p class="text-primary/70 font-medium">Member since June 15, 2023</p>
-<div class="flex gap-3 mt-4">
-<span class="px-3 py-1 bg-brand-purple/10 text-brand-purple text-xs font-bold rounded-full uppercase tracking-wider">Visionary</span>
-<span class="px-3 py-1 bg-brand-teal/10 text-brand-teal text-xs font-bold rounded-full uppercase tracking-wider">Top Contributor</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Main Content Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<!-- Left Column: Account Details -->
-<div class="bg-white dark:bg-[#2d1822] p-6 rounded-xl shadow-lg border border-primary/5">
-<div class="flex items-center gap-2 mb-6">
-<span class="material-symbols-outlined text-primary">person</span>
-<h3 class="text-xl font-bold">Account Details</h3>
-</div>
-<div class="flex flex-col gap-5">
-<label class="flex flex-col gap-1.5">
-<span class="text-sm font-semibold text-primary/80">Full Name</span>
-<input class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="Sarah Jenkins"/>
-</label>
-<label class="flex flex-col gap-1.5">
-<span class="text-sm font-semibold text-primary/80">Gmail</span>
-<input class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="email" value="sarah.jenkins@gmail.com"/>
-</label>
-<label class="flex flex-col gap-1.5">
-<span class="text-sm font-semibold text-primary/80">Password</span>
-<div class="relative">
-<input class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="password" value="••••••••••••"/>
-<button class="absolute right-3 top-3 text-primary/50 hover:text-primary">
-<span class="material-symbols-outlined text-base">visibility</span>
-</button>
-</div>
-</label>
-<label class="flex flex-col gap-1.5">
-<span class="text-sm font-semibold text-primary/80">Gender</span>
-<select class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none">
-<option selected="">Female</option>
-<option>Non-binary</option>
-<option>Prefer not to say</option>
-<option>Other</option>
-</select>
-</label>
-<button class="mt-2 bg-primary text-white py-3 rounded-xl font-bold hover:opacity-90 transition-opacity">Save Changes</button>
-</div>
-</div>
-<!-- Right Column: STEAM Experience -->
-<div class="bg-white dark:bg-[#2d1822] p-6 rounded-xl shadow-lg border border-primary/5 flex flex-col">
-<div class="flex items-center gap-2 mb-6">
-<span class="material-symbols-outlined text-primary">rocket_launch</span>
-<h3 class="text-xl font-bold">STEAM Experience</h3>
-</div>
-<p class="text-primary/60 text-sm mb-4">Select your core interests to personalize your learning journey.</p>
-<div class="flex flex-wrap gap-2 mb-auto">
-<div class="px-4 py-2 bg-brand-purple text-white rounded-full text-sm font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">smart_toy</span> Robotics
+
+    <nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+            <a href="home.html" class="flex items-center gap-2 group shrink-0">
+                <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+                    <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                </div>
+                <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+                    TEEN<span class="text-rose-500">4</span>STEAM
+                </span>
+            </a>
+            <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+                <a class="px-2 py-2 text-[12px] font-bold text-rose-600" href="home.html">Home</a>
+                <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+                <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+                <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+                <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+                <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
+                <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+                <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">ULearn</a>
+                <a class="px-2 py-2 text-[12px] font-black text-slate-900 hover:text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+                    Our Playground
+                </a>
+            </div>
+            <div class="flex items-center gap-4 shrink-0">
+                <div class="relative group hidden md:block">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                    <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+                        <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+                        <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text"/>
+                    </div>
+                </div>
+                <button id="navProfileBtn" class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+                    <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+                        <img id="navProfilePic" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                    </div>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="layout-container flex h-full grow flex-col">
+        <main class="flex flex-1 justify-center py-10 px-4">
+            <div class="layout-content-container flex flex-col max-w-[1000px] flex-1 gap-6">
+                
+                <div class="relative bg-white dark:bg-[#2d1822] p-8 rounded-xl shadow-xl border-t-4 border-primary overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16"></div>
+                    <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                        <div class="relative">
+                            <div id="mainProfilePic" class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-32 ring-4 ring-primary/10"></div>
+                            <input type="file" id="photoInput" class="hidden" accept="image/*" onchange="uploadPhoto(event)">
+                            <button onclick="triggerPhotoUpload()" class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-lg border-2 border-white dark:border-[#2d1822] hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-sm">edit</span>
+                            </button>
+                        </div>
+                        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                            <h1 id="displayName" class="text-3xl font-bold text-[#1b0e14] dark:text-white">Cargando...</h1>
+                            <p class="text-primary/70 font-medium italic">Creative, Intelligent & Visionary</p>
+                            <div id="headerInterests" class="flex gap-3 mt-4 flex-wrap justify-center md:justify-start"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white dark:bg-[#2d1822] p-6 rounded-xl shadow-lg border border-primary/5">
+                        <div class="flex items-center gap-2 mb-6">
+                            <span class="material-symbols-outlined text-primary">person</span>
+                            <h3 class="text-xl font-bold">Account Details</h3>
+                        </div>
+                        <div class="flex flex-col gap-5">
+                            <label class="flex flex-col gap-1.5">
+                                <span class="text-sm font-semibold text-primary/80">Full Name</span>
+                                <input id="inputFullName" class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 focus:border-primary outline-none transition-all" type="text" placeholder="Your Name"/>
+                            </label>
+                            <label class="flex flex-col gap-1.5">
+                                <span class="text-sm font-semibold text-primary/80">Gmail</span>
+                                <input id="inputEmail" readonly class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 opacity-60" type="email"/>
+                            </label>
+                            <label class="flex flex-col gap-1.5">
+                                <span class="text-sm font-semibold text-primary/80">Password</span>
+                                <div class="relative">
+                                    <input class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3" type="password" value="••••••••••••"/>
+                                    <button class="absolute right-3 top-3 text-primary/50 hover:text-primary">
+                                        <span class="material-symbols-outlined text-base">visibility</span>
+                                    </button>
                                 </div>
-<div class="px-4 py-2 bg-brand-teal text-white rounded-full text-sm font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">terminal</span> Coding
-                                </div>
-<div class="px-4 py-2 bg-brand-orange text-white rounded-full text-sm font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">architecture</span> Engineering
-                                </div>
-<div class="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">palette</span> Digital Art
-                                </div>
-<div class="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">science</span> Biotech
-                                </div>
-<div class="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">functions</span> Applied Math
-                                </div>
-<div class="px-4 py-2 bg-primary/5 text-primary/40 border border-primary/10 border-dashed rounded-full text-sm font-bold flex items-center gap-2 cursor-pointer hover:bg-primary/10">
-<span class="material-symbols-outlined text-sm">add</span> Add Interest
-                                </div>
-</div>
-<div class="mt-8 bg-background-light dark:bg-background-dark p-4 rounded-xl">
-<h4 class="font-bold mb-2 flex items-center gap-2">
-<span class="material-symbols-outlined text-brand-orange">emoji_events</span>
-                                    Current Focus
-                                </h4>
-<p class="text-sm opacity-80 leading-relaxed">Completing the "Advanced Python for Data Science" track. 85% of milestone 3 achieved.</p>
-</div>
-</div>
-</div>
-<!-- Bottom Section: Gamification Dashboard -->
-<div class="bg-gradient-to-br from-brand-purple via-[#6122a1] to-primary p-1 rounded-xl shadow-2xl">
-<div class="bg-white dark:bg-[#2d1822] rounded-[0.9rem] p-8">
-<div class="flex flex-col lg:flex-row items-center justify-between gap-8">
-<div class="flex items-center gap-6">
-<div class="relative size-24 flex items-center justify-center">
-<svg class="absolute inset-0 size-full -rotate-90">
-<circle class="text-primary/10" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-width="8"></circle>
-<circle class="text-brand-orange" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-dasharray="264" stroke-dashoffset="66" stroke-width="8"></circle>
-</svg>
-<div class="flex flex-col items-center">
-<span class="text-3xl font-bold">12</span>
-<span class="text-[10px] uppercase font-bold text-primary/60">Level</span>
-</div>
-</div>
-<div>
-<h3 class="text-2xl font-bold flex items-center gap-2">
-                                            STEAM SPARKS 
-                                            <span class="material-symbols-outlined text-brand-orange fill-1">bolt</span>
-</h3>
-<p class="text-3xl font-extrabold text-primary">4,850 <span class="text-sm font-medium text-primary/60">Points</span></p>
-</div>
-</div>
-<div class="flex-1 w-full max-w-lg">
-<div class="flex justify-between items-end mb-2">
-<p class="text-sm font-bold text-primary/80 uppercase">Progress to Level 13</p>
-<p class="text-xs font-bold">150 sparks remaining</p>
-</div>
-<div class="w-full bg-primary/10 h-4 rounded-full overflow-hidden flex">
-<div class="h-full bg-brand-orange w-3/4 rounded-full"></div>
-</div>
-<div class="flex justify-between mt-3">
-<div class="flex items-center gap-1.5 opacity-60">
-<span class="material-symbols-outlined text-sm">local_fire_department</span>
-<span class="text-xs font-bold">7 Day Streak</span>
-</div>
-<div class="flex items-center gap-1.5 opacity-60">
-<span class="material-symbols-outlined text-sm">military_tech</span>
-<span class="text-xs font-bold">24 Badges</span>
-</div>
-</div>
-</div>
-<button class="w-full lg:w-auto px-8 py-4 bg-brand-orange text-white rounded-xl font-bold shadow-lg hover:translate-y-[-2px] transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined">redeem</span>
-                                    Redeem Rewards
+                            </label>
+                            <label class="flex flex-col gap-1.5">
+                                <span class="text-sm font-semibold text-primary/80">Gender</span>
+                                <select id="inputGender" class="w-full rounded-lg border border-primary/10 bg-primary/5 dark:bg-background-dark/50 p-3 outline-none appearance-none">
+                                    <option>Female</option>
+                                    <option>Non-binary</option>
+                                    <option>Prefer not to say</option>
+                                    <option>Other</option>
+                                </select>
+                            </label>
+                            
+                            <div class="flex flex-col gap-3 mt-2">
+                                <button onclick="saveAccountChanges()" class="w-full bg-primary text-white py-3 rounded-xl font-bold hover:opacity-90 transition-opacity">
+                                    Save Changes
                                 </button>
+                                <button onclick="logout()" class="w-full flex items-center justify-center gap-2 text-rose-500 font-bold py-2 hover:bg-rose-50 rounded-xl transition-colors border border-rose-100">
+                                    <span class="material-symbols-outlined text-sm">logout</span>
+                                    Cerrar Sesión
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-[#2d1822] p-6 rounded-xl shadow-lg border border-primary/5 flex flex-col">
+                        <div class="flex items-center gap-2 mb-6">
+                            <span class="material-symbols-outlined text-primary">rocket_launch</span>
+                            <h3 class="text-xl font-bold">STEAM Experience</h3>
+                        </div>
+                        <p class="text-primary/60 text-sm mb-4">Select your core interests (STEAM) to personalize your profile header.</p>
+                        <div id="interestsSelector" class="flex flex-wrap gap-2 mb-auto"></div>
+                        <div class="mt-8 bg-background-light dark:bg-background-dark p-4 rounded-xl">
+                            <h4 class="font-bold mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-brand-orange">emoji_events</span>
+                                Current Focus
+                            </h4>
+                            <p class="text-sm opacity-80 leading-relaxed">Completing new tracks. Explore the playground to earn more sparks!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-brand-purple via-[#6122a1] to-primary p-1 rounded-xl shadow-2xl">
+                    <div class="bg-white dark:bg-[#2d1822] rounded-[0.9rem] p-8">
+                        <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                            <div class="flex items-center gap-6">
+                                <div class="relative size-24 flex items-center justify-center">
+                                    <svg class="absolute inset-0 size-full -rotate-90">
+                                        <circle class="text-primary/10" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-width="8"></circle>
+                                        <circle class="text-brand-orange" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-dasharray="264" stroke-dashoffset="198" stroke-width="8"></circle>
+                                    </svg>
+                                    <div class="flex flex-col items-center">
+                                        <span id="displayLevel" class="text-3xl font-bold">0</span>
+                                        <span class="text-[10px] uppercase font-bold text-primary/60">Level</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold flex items-center gap-2">STEAM SPARKS <span class="material-symbols-outlined text-brand-orange fill-1">bolt</span></h3>
+                                    <p class="text-3xl font-extrabold text-primary"><span id="displayPoints">0</span> <span class="text-sm font-medium text-primary/60">Points</span></p>
+                                </div>
+                            </div>
+                            <div class="flex-1 w-full max-w-lg">
+                                <div class="flex justify-between items-end mb-2">
+                                    <p class="text-sm font-bold text-primary/80 uppercase">Progress Tracker</p>
+                                    <p class="text-xs font-bold">Points are updated live</p>
+                                </div>
+                                <div class="w-full bg-primary/10 h-4 rounded-full overflow-hidden flex">
+                                    <div class="h-full bg-brand-orange w-1/4 rounded-full"></div>
+                                </div>
+                                <div class="flex justify-between mt-3">
+                                    <div class="flex items-center gap-1.5 opacity-60">
+                                        <span class="material-symbols-outlined text-sm">local_fire_department</span>
+                                        <span class="text-xs font-bold">7 Day Streak</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 opacity-60">
+                                        <span class="material-symbols-outlined text-sm">military_tech</span>
+                                        <span class="text-xs font-bold">24 Badges</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="window.location.href='market.html'" class="w-full lg:w-auto px-8 py-4 bg-brand-orange text-white rounded-xl font-bold shadow-lg hover:translate-y-[-2px] transition-all flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined">redeem</span>
+                                Redeem Rewards
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+                    <div class="col-span-1 lg:col-span-2">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 flex items-center justify-center">
+                                <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                            </div>
+                            <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                        </div>
+                        <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">
+                            Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.
+                        </p>
+                        <div class="flex gap-4 mt-8">
+                            <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path>
+                                    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 </div>
-</div>
-</div>
-</div>
-</main>
-<!-- Simple Footer -->
-<footer class="px-10 py-8 border-t border-primary/10 text-center opacity-50 text-sm">
-<p>© 2024 TEEN4STEAM. Empowering the next generation of girls in STEAM.</p>
-</footer>
-</div>
-</div>
-</body></html>
+</body>
+</html>

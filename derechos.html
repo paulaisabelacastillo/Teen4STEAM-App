@@ -1,82 +1,329 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Adventure for Children's Rights</title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Rights Adventure | TEEN4STEAM</title>
 
-<style>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
 
-body{
-margin:0;
-height:100vh;
-background-image:url("img/derechos.jpeg");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-}
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#da237b",
+            secondary: "#4a1a79",
+            accent: "#ef972c",
+            "text-muted": "#64748b"
+          },
+          fontFamily: {
+            display: ["Plus Jakarta Sans", "sans-serif"]
+          },
+        },
+      },
+    }
+  </script>
 
-/* titulo centrado arriba */
+  <style type="text/tailwindcss">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #ffffff;
+      margin: 0;
+    }
 
-.titulo{
-position:absolute;
-top:20px;
-left:50%;
-transform:translateX(-50%);
-width:500px;
-max-width:80%;
-z-index:10;
-}
+    /* IMAGEN DE BORDE A BORDE */
+    #game-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9; /* Mantiene la proporción de tu ilustración */
+      min-height: 600px;
+      background-image: url("img/derechos.jpeg");
+      background-size: 100% 100%; /* Borde a borde total */
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+    }
 
-/* contenedor de cofres */
-.contenedor-cofres{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%, -50%);
-display:flex;
-flex-direction:column;
-gap:40px;
-align-items:center;
-z-index:10;
-}
+    #contador {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 20;
+      background: rgba(74, 26, 121, 0.9);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 800;
+      border: 2px solid #da237b;
+    }
 
-.fila-cofres{
-display:flex;
-gap:30px;
-justify-content:center;
-}
+    .titulo-principal {
+      position: relative;
+      z-index: 10;
+      width: 450px;
+      max-width: 80%;
+      margin-top: 40px;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    }
 
-.cofre{
-width:80px;
-height:80px;
-object-fit:contain;
-text-align:center;
-}
+    .contenedor-cofres {
+      position: relative;
+      z-index: 15;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; 
+      flex: 1;
+      width: 100%;
+      padding-bottom: 60px;
+    }
 
-</style>
+    .fila { display: flex; justify-content: center; width: 100%; gap: 15px; }
 
+    .cofre-wrap {
+      position: relative;
+      width: 180px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      transition: transform 0.3s ease;
+    }
+    .cofre-wrap:hover { transform: scale(1.1); }
+    .cofre { width: 100%; cursor: pointer; }
+
+    .gema {
+      position: absolute;
+      bottom: 55px;
+      width: 65px;
+      z-index: 50;
+      cursor: pointer;
+      filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8));
+    }
+
+    .tablero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .tablero-bg {
+      background: white;
+      color: #1e293b;
+      width: 90%;
+      max-width: 420px;
+      padding: 40px;
+      border-radius: 2.5rem;
+      text-align: center;
+      border: 4px solid #da237b;
+    }
+  </style>
 </head>
+<body class="flex flex-col min-h-screen">
 
-<body>
+  <nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+      <a href="home.html" class="flex items-center gap-2 group shrink-0">
+        <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+          <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+        </div>
+        <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+          TEEN<span class="text-rose-500">4</span>STEAM
+        </span>
+      </a>
 
-<img src="img/rights.png" class="titulo">
+      <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="ulearn.html">ULearn</a>
+        <a class="px-2 py-2 text-[12px] font-black text-rose-600 underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">Our Playground</a>
+      </div>
 
-<div class="contenedor-cofres">
-  <div class="fila-cofres">
-    <img src="img/cofre.png" class="cofre">
-    <img src="img/cofre.png" class="cofre">
-    <img src="img/cofre.png" class="cofre">
-    <img src="img/cofre.png" class="cofre">
-    <img src="img/cofre.png" class="cofre">
-  </div>
-  <div class="fila-cofres">
-    <img src="img/cofre.png" class="cofre">
-    <img src="img/cofre.png" class="cofre">
-    <img src="img/cofre.png" class="cofre">
-    <img src="img/cofre.png" class="cofre">
-    <img src="img/cofre.png" class="cofre">
-  </div>
-</div>
+      <div class="flex items-center gap-4 shrink-0">
+        <div class="relative group hidden md:block">
+          <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 shadow-sm group-hover:shadow-md transition-all">
+            <span class="material-symbols-outlined text-rose-500 text-lg">search</span>
+            <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text" />
+          </div>
+        </div>
+        <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+          <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+          </div>
+        </button>
+      </div>
+    </div>
+  </nav>
 
+  <main id="game-viewport">
+    <div id="contador">💎 0/10</div>
+    <img src="img/rightss.png" class="titulo-principal">
+    <div class="contenedor-cofres" id="juego">
+      <div class="fila" id="fila1"></div>
+      <div class="fila" id="fila2"></div>
+    </div>
+
+    <div class="tablero-overlay" id="overlay">
+      <div class="tablero-bg">
+        <h3 class="text-secondary font-black text-2xl mb-4 uppercase">Is the right respected?</h3>
+        <div id="tabInfo" class="bg-rose-50 p-6 rounded-3xl text-slate-700 font-bold mb-8 text-sm italic border border-rose-100"></div>
+        <div class="flex gap-4 justify-center" id="opciones">
+          <button class="px-8 py-3 bg-green-500 text-white rounded-2xl font-black uppercase hover:scale-105 transition-all" onclick="validar(true)">YES</button>
+          <button class="px-8 py-3 bg-red-500 text-white rounded-2xl font-black uppercase hover:scale-105 transition-all" onclick="validar(false)">NO</button>
+        </div>
+        <div id="feedback" class="text-2xl font-black mt-4"></div>
+        <button class="hidden bg-secondary text-white px-10 py-4 rounded-full font-black text-sm shadow-xl mx-auto mt-6" id="btnNext" onclick="nuevaRonda()">Next Round ✨</button>
+        <button class="hidden bg-primary text-white px-10 py-4 rounded-full font-black text-sm shadow-xl mx-auto mt-6" id="btnWin" onclick="location.href='adventurers.html'">FINISH 🚀</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.</p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                    <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary cursor-default"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="ulearn.html">ULearn</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Our Playground</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  <script>
+    // Lógica del juego igual
+    const bancoDerechos = [
+        { t: "Education", s: "A child works selling candy and does not go to school.", r: false },
+        { t: "Health", s: "If you get sick, you receive medicine and medical care.", r: true },
+        { t: "Play", s: "Playing in the park is forbidden so the grass doesn't get damaged.", r: false },
+        { t: "Family", s: "You live with people who love you and always protect you.", r: true },
+        { t: "Identity", s: "A child is denied their name and nationality.", r: false },
+        { t: "Equality", s: "In class, everyone plays together regardless of their origin.", r: true },
+        { t: "Protection", s: "A child suffers from yelling and mistreatment at home.", r: false },
+        { t: "Opinion", s: "Your teacher listens to and respects what you think about the class.", r: true },
+        { t: "Nutrition", s: "A child goes hungry because they have no food at home.", r: false },
+        { t: "Peace", s: "You live calmly without fear of conflicts or wars.", r: true }
+    ];
+
+    let gemas = 0; let abiertos = 0; let gemaImg = null;
+
+    function crearCofres() {
+        const f1 = document.getElementById('fila1'); const f2 = document.getElementById('fila2');
+        f1.innerHTML = ""; f2.innerHTML = ""; abiertos = 0;
+        const ronda = [...bancoDerechos].sort(() => Math.random() - 0.5);
+
+        ronda.forEach((dato, i) => {
+            const wrap = document.createElement('div');
+            wrap.className = 'cofre-wrap';
+            const img = document.createElement('img');
+            img.src = 'img/cofre cerrado.png';
+            img.className = 'cofre';
+            img.onclick = function() {
+                if (this.src.includes('tesoro.png')) return;
+                this.src = 'img/tesoro.png'; abiertos++;
+                const g = document.createElement('img');
+                g.src = 'img/diamante.png';
+                g.className = 'gema';
+                g.onclick = (e) => { e.stopPropagation(); abrirQuiz(g, dato); };
+                wrap.appendChild(g);
+            };
+            wrap.appendChild(img);
+            if (i < 5) f1.appendChild(wrap); else f2.appendChild(wrap);
+        });
+    }
+
+    function abrirQuiz(g, d) {
+        gemaImg = g; window.currentD = d;
+        document.getElementById('feedback').innerText = "";
+        document.getElementById('opciones').style.display = "flex";
+        document.getElementById('btnNext').style.display = "none";
+        document.getElementById('btnWin').style.display = "none";
+        document.getElementById('tabInfo').innerText = d.s;
+        document.getElementById('overlay').style.display = 'flex';
+    }
+
+    function validar(ans) {
+        const esC = (ans === window.currentD.r);
+        document.getElementById('opciones').style.display = "none";
+        if (esC) {
+            document.getElementById('feedback').innerText = "CORRECT! ✨";
+            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; animarGema(); }, 800);
+        } else {
+            document.getElementById('feedback').innerText = "INCORRECT! ❌";
+            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; if (gemaImg) gemaImg.remove(); verificar(); }, 1200);
+        }
+    }
+
+    function animarGema() {
+        const cont = document.getElementById('contador').getBoundingClientRect();
+        const rect = gemaImg.getBoundingClientRect();
+        gemaImg.style.transform = `translate(${cont.left - rect.left}px, ${cont.top - rect.top}px) scale(0.1)`;
+        gemaImg.style.opacity = "0";
+        setTimeout(() => { gemas++; document.getElementById('contador').innerText = `💎 ${gemas}/10`; gemaImg.remove(); verificar(); }, 850);
+    }
+
+    function verificar() {
+        if (gemas >= 10) {
+            document.getElementById('overlay').style.display = 'flex';
+            document.getElementById('tabInfo').innerText = "Congratulations! 🚀";
+            document.getElementById('btnWin').style.display = "block";
+        } else if (abiertos === 10) {
+            document.getElementById('overlay').style.display = 'flex';
+            document.getElementById('tabInfo').innerText = "Round finished!";
+            document.getElementById('btnNext').style.display = "block";
+        }
+    }
+
+    function nuevaRonda() { document.getElementById('overlay').style.display = 'none'; crearCofres(); }
+    crearCofres();
+  </script>
 </body>
 </html>

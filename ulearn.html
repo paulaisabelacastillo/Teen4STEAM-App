@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ULearn | TEEN4STEAM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#da237b",
+                        "secondary": "#4a1a79",
+                        "accent": "#ef972c",
+                        "neutral-light": "#ffffff",
+                        "text-main": "#1e293b",
+                        "text-muted": "#64748b"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fff1f2;
+            color: #1e293b;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .video-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            flex-shrink: 0;
+        }
+        .video-card:hover {
+            transform: scale(1.1);
+            z-index: 30;
+        }
+        .title-gradient {
+            background: linear-gradient(135deg, #4a1a79 0%, #da237b 50%, #ef972c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .scroll-indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 120px;
+            background: linear-gradient(to right, transparent, #fff1f2);
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-[#fff1f2]">
+
+
+<nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+        
+        <a href="home.html" class="flex items-center gap-2 group shrink-0">
+            <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+                <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+            </div>
+            <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+                TEEN<span class="text-rose-500">4</span>STEAM
+            </span>
+        </a>
+
+        <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+            <a class="px-2 py-2 text-[12px] font-bold text-rose-600" href="ulearn.html">ULearn</a>
+            
+            <a class="px-2 py-2 text-[12px] font-black text-slate-900 hover:text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+                Our Playground
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4 shrink-0">
+            <div class="relative group hidden md:block">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+                    <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+                    <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text"/>
+                </div>
+            </div>
+
+            <button id="navProfileBtn" class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+                <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+                    <img id="navProfilePic" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                </div>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-6 py-16">
+    
+    <header class="mb-20 text-center">
+        <h1 class="text-7xl md:text-8xl font-black tracking-tighter title-gradient mb-4">ULearn</h1>
+        <p class="text-text-muted text-lg md:text-xl font-medium max-w-2xl mx-auto italic">
+            "Unlock your potential through the lens of innovation and female leadership."
+        </p>
+    </header>
+
+    <section class="mb-24">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-black text-secondary tracking-tight">Explore STEAM in everything</h2>
+            <div class="flex items-center gap-2 text-primary font-bold animate-pulse">
+                <span class="text-[10px] uppercase tracking-widest">Swipe for more</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator relative">
+            <div class="flex gap-4 overflow-x-auto no-scrollbar pb-10 px-1">
+                
+                <div class="video-card w-[220px] md:w-[260px] group cursor-pointer">
+                    <div class="aspect-video rounded-xl overflow-hidden bg-secondary relative shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-80" alt="STEAM">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <h3 class="text-white font-bold text-sm">What is STEAM?</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="border border-white/40 text-[8px] text-white px-1 font-bold">ALL</span>
+                                <span class="text-[9px] text-rose-300 font-bold">12m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card w-[220px] md:w-[260px] group cursor-pointer">
+                    <div class="aspect-video rounded-xl overflow-hidden bg-secondary relative shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-80" alt="Science">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <h3 class="text-white font-bold text-sm italic">Science is in everything</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="border border-white/40 text-[8px] text-white px-1 font-bold">7+</span>
+                                <span class="text-[9px] text-rose-300 font-bold">15m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card w-[220px] md:w-[260px] group cursor-pointer">
+                    <div class="aspect-video rounded-xl overflow-hidden bg-secondary relative shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-80" alt="Tech">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <h3 class="text-white font-bold text-sm italic">Tech is in everything</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="border border-white/40 text-[8px] text-white px-1 font-bold">ALL</span>
+                                <span class="text-[9px] text-rose-300 font-bold">18m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card w-[220px] md:w-[260px] group cursor-pointer">
+                    <div class="aspect-video rounded-xl overflow-hidden bg-secondary relative shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1581094142603-5d519d3f11d1?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-80" alt="Eng">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <h3 class="text-white font-bold text-sm italic">Engineering is in everything</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="border border-white/40 text-[8px] text-white px-1 font-bold">10+</span>
+                                <span class="text-[9px] text-rose-300 font-bold">22m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card w-[220px] md:w-[260px] group cursor-pointer">
+                    <div class="aspect-video rounded-xl overflow-hidden bg-secondary relative shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-80" alt="Art">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <h3 class="text-white font-bold text-sm italic">Art is in everything</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="border border-white/40 text-[8px] text-white px-1 font-bold">ALL</span>
+                                <span class="text-[9px] text-rose-300 font-bold">10m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card w-[220px] md:w-[260px] group cursor-pointer">
+                    <div class="aspect-video rounded-xl overflow-hidden bg-secondary relative shadow-lg border border-primary/20">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-80" alt="Math">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <h3 class="text-white font-bold text-sm italic">Math is in everything</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="border border-white/40 text-[8px] text-white px-1 font-bold">7+</span>
+                                <span class="text-[9px] text-rose-300 font-bold">20m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.</p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="ulearn.html">ULearn</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Our Playground</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Our Playground</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#da237b",
+            secondary: "#4a1a79",
+            accent: "#ef972c",
+            "neutral-light": "#ffffff",
+            "neutral-border": "#f1f5f9",
+            "text-main": "#1e293b",
+            "text-muted": "#64748b"
+          },
+          fontFamily: {
+            display: ["Plus Jakarta Sans", "sans-serif"]
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Plus Jakarta Sans',sans-serif;
+      background:#ffffff;
+      color:#1e293b;
+      overflow-x:hidden;
+    }
+
+    #vertical-playground{
+      height:100vh;
+      overflow-y:auto;
+      scroll-snap-type:y mandatory;
+      scrollbar-width:none;
+      -ms-overflow-style:none;
+      background:#000;
+    }
+
+    #vertical-playground::-webkit-scrollbar{
+      display:none;
+    }
+
+    .scene{
+      position:relative;
+      width:100%;
+      height:100vh;
+      overflow:hidden;
+      scroll-snap-align:start;
+      scroll-snap-stop:always;
+      background:#000;
+    }
+
+    .scene-bg{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      object-position:center center;
+      transform:scale(1.01);
+    }
+
+    .scene::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 85% 85%, rgba(255,255,255,.10), transparent 18%),
+        linear-gradient(to top, rgba(0,0,0,.18), rgba(0,0,0,0) 25%),
+        linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,0) 20%);
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .level-pill{
+      position:absolute;
+      top:20px;
+      left:20px;
+      z-index:10;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.24);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    /* BOTÓN SIGUIENTE - SUBIDO DE POSICIÓN */
+    .next-btn{
+      position:absolute;
+      right:30px;
+      bottom:120px; /* Subido para que no se pierda al final */
+      z-index:12;
+      width:88px;
+      height:88px;
+      border:none;
+      border-radius:999px;
+      padding:0;
+      cursor:pointer;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.08)),
+        linear-gradient(135deg, rgba(218,35,123,.92), rgba(74,26,121,.92));
+      box-shadow:
+        0 14px 34px rgba(74,26,121,.35),
+        inset 0 1px 1px rgba(255,255,255,.25);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+      overflow:hidden;
+    }
+
+    .next-btn::before{
+      content:"";
+      position:absolute;
+      inset:4px;
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.04));
+      pointer-events:none;
+    }
+
+    .next-btn::after{
+      content:"";
+      position:absolute;
+      width:110%;
+      height:110%;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(255,255,255,.16), transparent 60%);
+      opacity:.65;
+      pointer-events:none;
+    }
+
+    .next-btn:hover{
+      transform:translateY(-3px) scale(1.05);
+      box-shadow:
+        0 18px 40px rgba(74,26,121,.42),
+        inset 0 1px 1px rgba(255,255,255,.28);
+      filter:brightness(1.05);
+    }
+
+    .next-btn:active{
+      transform:scale(.98);
+    }
+
+    .arrow-icon{
+      position:relative;
+      z-index:2;
+      font-size:52px;
+      line-height:1;
+      color:#ffffff;
+      font-variation-settings:
+        "FILL" 1,
+        "wght" 700,
+        "GRAD" 0,
+        "opsz" 48;
+      animation:bounceDown 1.8s infinite ease-in-out;
+      filter:drop-shadow(0 4px 8px rgba(0,0,0,.18));
+      user-select:none;
+      pointer-events:none;
+    }
+
+    @keyframes bounceDown{
+      0%,100%{ transform:translateY(0); }
+      50%{ transform:translateY(6px); }
+    }
+
+    .finish-btn{
+      position:absolute;
+      right:22px;
+      bottom:120px; /* También subido en la escena final */
+      z-index:12;
+      border:none;
+      border-radius:999px;
+      padding:14px 22px;
+      cursor:pointer;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,.06)),
+        linear-gradient(135deg, rgba(218,35,123,.95), rgba(74,26,121,.95));
+      color:#fff;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      box-shadow:
+        0 14px 34px rgba(74,26,121,.35),
+        inset 0 1px 1px rgba(255,255,255,.24);
+      text-decoration:none;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+
+    .scene-dots{
+      position:fixed;
+      right:20px;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:30;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .scene-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.35);
+      border:1px solid rgba(255,255,255,.35);
+      transition:all .25s ease;
+      box-shadow:0 4px 14px rgba(0,0,0,.12);
+    }
+
+    .scene-dot.active{
+      height:28px;
+      background:linear-gradient(180deg, #da237b, #4a1a79);
+      border-color:rgba(255,255,255,.7);
+    }
+
+    /* ESTILOS DE LOS BOTONES MEJORADOS */
+    .game-road-path {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .game-btn {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #fff;
+      padding: 4px;
+      pointer-events: auto;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      animation: float 4s ease-in-out infinite;
+      border: 3px solid var(--btn-color, #fff);
+    }
+
+    .game-btn:hover {
+      transform: scale(1.2) translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px var(--btn-color, #da237b);
+      z-index: 50;
+    }
+
+    .game-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    /* ASIGNACIÓN DE COLORES LINDOS Y POSICIONES */
+    .btn-trivia     { top: 8%; left: 22%; --btn-color: #a855f7; animation-delay: 0s; }
+    .btn-derechos   { top: 26%; left: 12%; --btn-color: #ec4899; animation-delay: 0.5s; }
+    .btn-ciencia    { top: 42%; left: 20%; --btn-color: #22c55e; animation-delay: 1s; }
+    .btn-tech       { top: 40%; left: 36%; --btn-color: #f59e0b; animation-delay: 1.5s; }
+    .btn-ingenieria { top: 40%; left: 52%; --btn-color: #c679f0; animation-delay: 2s; }
+    .btn-arte       { top: 55%; left: 60%; --btn-color: #ef44d2; animation-delay: 2.5s; }
+    .btn-math       { top: 76%; left: 47%; --btn-color: #06b6d4; animation-delay: 3s; }
+
+    @keyframes float {
+      0%, 100% { margin-top: 0; }
+      50% { margin-top: -12px; }
+    }
+
+    @media (max-width:768px){
+      .next-btn, .finish-btn { bottom: 80px; width: 64px; height: 64px; }
+      .arrow-icon { font-size: 36px; }
+      .game-btn { width: 55px; height: 55px; }
+      .btn-math { top: 92%; }
+    }
+  </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+  <nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+
+      <a href="home.html" class="flex items-center gap-2 group shrink-0">
+        <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+          <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+        </div>
+        <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+          TEEN<span class="text-rose-500">4</span>STEAM
+        </span>
+      </a>
+
+      <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="ulearn.html">ULearn</a>
+
+        <a class="px-2 py-2 text-[12px] font-black text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+          Our Playground
+        </a>
+      </div>
+
+      <div class="flex items-center gap-4 shrink-0">
+        <div class="relative group hidden md:block">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+          <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+            <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+            <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text" />
+          </div>
+        </div>
+
+        <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+          <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+          </div>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="scene-dots" aria-hidden="true">
+    <span class="scene-dot active" data-dot="scene-1"></span>
+    <span class="scene-dot" data-dot="scene-2"></span>
+    <span class="scene-dot" data-dot="scene-3"></span>
+    <span class="scene-dot" data-dot="scene-4"></span>
+    <span class="scene-dot" data-dot="scene-5"></span>
+  </div>
+
+  <main class="w-full">
+    <section id="vertical-playground" aria-label="Vertical playground levels">
+
+      <div class="scene" id="scene-1">
+        <img src="img/escenario1.png" alt="Level 1" class="scene-bg">
+        <div class="level-pill">Level 1</div>
+
+        <div class="game-road-path">
+          <a href="trivia.html" class="game-btn btn-trivia"><img src="img/trivia.png" alt="Trivia"></a>
+          <a href="derechos.html" class="game-btn btn-derechos"><img src="img/derechos.png" alt="Derechos"></a>
+          <a href="#" class="game-btn btn-ciencia"><img src="img/ciencia.png" alt="Ciencia"></a>
+          <a href="cybersecurity.html" class="game-btn btn-tech"><img src="img/tech.png" alt="Tech"></a>
+          <a href="ingenieriacreativa.html" class="game-btn btn-ingenieria"><img src="img/ingenieria.png" alt="Ingenieria"></a>
+          <a href="artstudio.html" class="game-btn btn-arte"><img src="img/arte.png" alt="Arte"></a>
+          <a href="mathmagico.html" class="game-btn btn-math"><img src="img/math.png" alt="Math"></a>
+        </div>
+
+        <button class="next-btn" data-next="scene-2" aria-label="Go to next level">
+          <span class="material-symbols-outlined arrow-icon">keyboard_arrow_down</span>
+        </button>
+      </div>
+
+      <div class="scene" id="scene-2">
+        <img src="img/escenario2.png" alt="Level 2" class="scene-bg">
+        <div class="level-pill">Level 2</div>
+        <button class="next-btn" data-next="scene-3" aria-label="Go to next level">
+          <span class="material-symbols-outlined arrow-icon">keyboard_arrow_down</span>
+        </button>
+      </div>
+
+      <div class="scene" id="scene-3">
+        <img src="img/escenario3.png" alt="Level 3" class="scene-bg">
+        <div class="level-pill">Level 3</div>
+        <button class="next-btn" data-next="scene-4" aria-label="Go to next level">
+          <span class="material-symbols-outlined arrow-icon">keyboard_arrow_down</span>
+        </button>
+      </div>
+
+      <div class="scene" id="scene-4">
+        <img src="img/escenario4.png" alt="Level 4" class="scene-bg">
+        <div class="level-pill">Level 4</div>
+        <button class="next-btn" data-next="scene-5" aria-label="Go to next level">
+          <span class="material-symbols-outlined arrow-icon">keyboard_arrow_down</span>
+        </button>
+      </div>
+
+      <div class="scene" id="scene-5">
+        <img src="img/escenario5.png" alt="Level 5" class="scene-bg">
+        <div class="level-pill">Level 5</div>
+        <a href="playground.html" class="finish-btn">Finish Journey</a>
+      </div>
+
+    </section>
+  </main>
+<footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.</p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                    <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary cursor-default"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="ulearn.html">ULearn</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Our Playground</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  <script>
+    const nextButtons = document.querySelectorAll(".next-btn");
+    const playground = document.getElementById("vertical-playground");
+    const scenes = document.querySelectorAll(".scene");
+    const dots = document.querySelectorAll(".scene-dot");
+
+    nextButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const nextId = button.getAttribute("data-next");
+        const nextScene = document.getElementById(nextId);
+        if (nextScene) {
+          nextScene.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const activeId = entry.target.id;
+          dots.forEach(dot => {
+            dot.classList.toggle("active", dot.dataset.dot === activeId);
+          });
+        }
+      });
+    }, { root: playground, threshold: 0.6 });
+
+    scenes.forEach(scene => observer.observe(scene));
+  </script>
+
+</body>
+</html>

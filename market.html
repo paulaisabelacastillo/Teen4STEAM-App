@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Marketplace | TEEN4STEAM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#da237b",
+                        "secondary": "#4a1a79",
+                        "awning-pink": "#FFB3D9", /* COLOR EXACTO DE TU IMAGEN */
+                        "rose-gold": "#E0BFB8"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
+        }
+
+        /* --- TOLDA RECONSTRUIDA (COLOR Y FORMA) --- */
+        .awning-container {
+            @apply relative w-full h-20 z-40;
+            background: repeating-linear-gradient(90deg, #FFB3D9, #FFB3D9 50px, #ffffff 50px, #ffffff 100px);
+            box-shadow: inset 0 -4px 10px rgba(0,0,0,0.05);
+        }
+        .awning-edge {
+            @apply absolute w-full h-10;
+            bottom: -32px;
+            background-image: radial-gradient(circle at 25px 0px, #FFB3D9 25px, transparent 26px),
+                              radial-gradient(circle at 75px 0px, #ffffff 25px, transparent 26px);
+            background-size: 100px 40px;
+            filter: drop-shadow(0 8px 6px rgba(0,0,0,0.1));
+        }
+
+        /* --- ESTANTES ROSE GOLD --- */
+        .shelf-row {
+            @apply relative pb-8 mb-16;
+        }
+        .glass-shelf {
+            @apply absolute bottom-0 left-0 w-full h-4 z-0 rounded-full;
+            background: rgba(224, 191, 184, 0.25);
+            backdrop-filter: blur(8px);
+            border-bottom: 3px solid #E0BFB8;
+            box-shadow: 0 10px 20px rgba(218, 35, 123, 0.05);
+        }
+
+        /* --- PRODUCTOS UNIFORMES --- */
+        .product-card {
+            @apply flex flex-col bg-white border border-slate-100 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm z-10;
+            height: 420px; 
+            width: 100%;
+        }
+        .product-card:hover {
+            @apply shadow-2xl border-rose-200;
+            transform: translateY(-10px);
+        }
+
+        .img-container {
+            @apply h-52 w-full bg-slate-50 overflow-hidden shrink-0;
+        }
+        .img-container img {
+            @apply w-full h-full object-cover transition-transform duration-700;
+        }
+        .product-card:hover .img-container img {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+
+
+
+<nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+        
+        <a href="home.html" class="flex items-center gap-2 group shrink-0">
+            <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+                <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+            </div>
+            <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+                TEEN<span class="text-rose-500">4</span>STEAM
+            </span>
+        </a>
+
+        <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+            <a class="px-2 py-2 text-[12px] font-bold text-rose-600" href="market.html">Marketplace</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="ulearn.html">ULearn</a>
+            
+            <a class="px-2 py-2 text-[12px] font-black text-slate-900 hover:text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+                Our Playground
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4 shrink-0">
+            <div class="relative group hidden md:block">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+                    <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+                    <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text"/>
+                </div>
+            </div>
+
+            <button id="navProfileBtn" class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+                <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+                    <img id="navProfilePic" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                </div>
+            </button>
+        </div>
+    </div>
+</nav>
+
+
+<div class="awning-container">
+    <div class="awning-edge"></div>
+</div>
+
+<main class="max-w-7xl mx-auto px-6 py-24">
+    <header class="mb-20">
+        <h1 class="text-5xl font-black tracking-tighter text-slate-900 mb-3">Marketplace</h1>
+        <p class="text-slate-500 text-lg font-medium italic">Redeem your energies for exclusive kits.</p>
+    </header>
+
+    <div class="shelf-row">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="product-card">
+                <div class="img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600"></div>
+                <div class="p-6 flex flex-col flex-1">
+                    <span class="text-[10px] font-black text-rose-500 uppercase mb-2">Hardware</span>
+                    <h3 class="font-bold text-slate-900 text-sm mb-2">XplorBot Pro Kit</h3>
+                    <p class="text-slate-500 text-xs mb-6 italic line-clamp-2">Autonomous robot with ESP32-S3 integration.</p>
+                    <button class="mt-auto w-full py-3 bg-secondary text-white rounded-xl font-black text-[10px] tracking-widest hover:brightness-110 transition-all">REDEEM (1.2k NRG)</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?w=600"></div>
+                <div class="p-6 flex flex-col flex-1">
+                    <span class="text-[10px] font-black text-rose-500 uppercase mb-2">Science</span>
+                    <h3 class="font-bold text-slate-900 text-sm mb-2">Eco-Makeup Lab</h3>
+                    <p class="text-slate-500 text-xs mb-6 italic line-clamp-2">Create sustainable pigments and organic makeup.</p>
+                    <button class="mt-auto w-full py-3 bg-primary text-white rounded-xl font-black text-[10px] tracking-widest hover:brightness-110 transition-all">REDEEM (850 NRG)</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><img src="https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600"></div>
+                <div class="p-6 flex flex-col flex-1">
+                    <span class="text-[10px] font-black text-rose-500 uppercase mb-2">Gear</span>
+                    <h3 class="font-bold text-slate-900 text-sm mb-2">Rose Gold Tools</h3>
+                    <p class="text-slate-500 text-xs mb-6 italic line-clamp-2">Premium engineering precision toolset.</p>
+                    <button class="mt-auto w-full py-3 bg-secondary text-white rounded-xl font-black text-[10px] tracking-widest hover:brightness-110 transition-all">REDEEM (2.1k NRG)</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><img src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?w=600"></div>
+                <div class="p-6 flex flex-col flex-1">
+                    <span class="text-[10px] font-black text-rose-500 uppercase mb-2">Aesthetic</span>
+                    <h3 class="font-bold text-slate-900 text-sm mb-2">Stationery Pack</h3>
+                    <p class="text-slate-500 text-xs mb-6 italic line-clamp-2">Exclusive STEAM stationery for creators.</p>
+                    <button class="mt-auto w-full py-3 bg-primary text-white rounded-xl font-black text-[10px] tracking-widest hover:brightness-110 transition-all">REDEEM (950 NRG)</button>
+                </div>
+            </div>
+        </div>
+        <div class="glass-shelf"></div>
+    </div>
+
+    <div class="shelf-row">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="product-card">
+                <div class="img-container"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600"></div>
+                <div class="p-6 flex flex-col flex-1">
+                    <span class="text-[10px] font-black text-rose-500 uppercase mb-2">Apparel</span>
+                    <h3 class="font-bold text-slate-900 text-sm mb-2">Signature Hoodie</h3>
+                    <p class="text-slate-500 text-xs mb-6 italic line-clamp-2">Magenta high-definition community hoodie.</p>
+                    <button class="mt-auto w-full py-3 bg-secondary text-white rounded-xl font-black text-[10px] tracking-widest hover:brightness-110 transition-all">REDEEM (1.8k NRG)</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600"></div>
+                <div class="p-6 flex flex-col flex-1">
+                    <span class="text-[10px] font-black text-rose-500 uppercase mb-2">Software</span>
+                    <h3 class="font-bold text-slate-900 text-sm mb-2">Python Masterclass</h3>
+                    <p class="text-slate-500 text-xs mb-6 italic line-clamp-2">Advanced AI and Web development course.</p>
+                    <button class="mt-auto w-full py-3 bg-primary text-white rounded-xl font-black text-[10px] tracking-widest hover:brightness-110 transition-all">REDEEM (500 NRG)</button>
+                </div>
+            </div>
+            <div class="product-card bg-rose-50/20 border-rose-200">
+                <div class="h-52 bg-gradient-to-br from-primary to-secondary flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-white text-6xl animate-pulse">stars</span>
+                </div>
+                <div class="p-6 flex flex-col flex-1 text-center">
+                    <h3 class="font-black text-slate-900 text-sm mb-4">Ultra Founder Access</h3>
+                    <button class="mt-auto w-full py-3 bg-slate-900 text-white rounded-xl font-black text-[10px] tracking-widest hover:bg-black transition-all">UPGRADE NOW</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600"></div>
+                <div class="p-6 flex flex-col flex-1">
+                    <span class="text-[10px] font-black text-rose-500 uppercase mb-2">Tech</span>
+                    <h3 class="font-bold text-slate-900 text-sm mb-2">STEAM Watch</h3>
+                    <p class="text-slate-500 text-xs mb-6 italic line-clamp-2">Smart tracker for innovation hours.</p>
+                    <button class="mt-auto w-full py-3 bg-secondary text-white rounded-xl font-black text-[10px] tracking-widest hover:brightness-110 transition-all">REDEEM (2.5k NRG)</button>
+                </div>
+            </div>
+        </div>
+        <div class="glass-shelf"></div>
+    </div>
+</main>
+
+<footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.</p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="ulearn.html">ULearn</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Our Playground</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if(btn.innerText.includes("REDEEM")) {
+                btn.innerText = "READY TO SHIP!";
+                btn.classList.add('bg-green-600');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

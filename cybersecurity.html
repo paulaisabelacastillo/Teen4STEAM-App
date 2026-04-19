@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Cybersecurity Challenge | TEEN4STEAM</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#da237b",
+            secondary: "#4a1a79",
+            accent: "#ef972c",
+            "neutral-light": "#ffffff",
+            "neutral-border": "#f1f5f9",
+            "text-main": "#1e293b",
+            "text-muted": "#64748b"
+          },
+          fontFamily: {
+            display: ["Plus Jakarta Sans", "sans-serif"]
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Contenedor del Juego */
+    #game-area {
+      flex: 1;
+      display: flex;
+      height: 80vh;
+      background: linear-gradient(135deg,#2b2f77,#0f172a);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #apps {
+      width: 90px;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      gap: 25px;
+    }
+
+    .app { font-size: 28px; cursor: pointer; transition: 0.2s; }
+    .app:hover { transform: scale(1.2); }
+
+    #window {
+      flex: 1;
+      margin: 20px;
+      border-radius: 20px;
+      background: linear-gradient(135deg,#fff0f5,#ffe4f0);
+      color: #1e293b;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(255,255,255,0.2);
+    }
+
+    #topbar { background: #ff7eb3; color: white; padding: 12px; font-weight: bold; }
+    #content { padding: 15px; height: 70vh; overflow: auto; }
+
+    .card {
+      background: white; padding: 12px; margin: 6px 0; border-radius: 12px;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; border-left: 6px solid #ff7eb3;
+      box-shadow: 0 0 8px #ff7eb3; transition: 0.2s;
+    }
+    .card:hover { transform: scale(1.02); }
+
+    .delete { background: #ff4f7b; color: white; border: none; border-radius: 8px; padding: 5px 10px; cursor: pointer; }
+
+    #hud { position: absolute; top: 10px; right: 20px; font-size: 18px; color: white; z-index: 10; }
+
+    #modal {
+      position: fixed; inset: 0; display: none; justify-content: center;
+      align-items: center; background: rgba(0,0,0,0.7); z-index: 100;
+    }
+    #modalContent { background: white; color: black; padding: 20px; border-radius: 15px; width: 300px; text-align: center; }
+  </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+  <nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+      <a href="home.html" class="flex items-center gap-2 group shrink-0">
+        <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+          <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+        </div>
+        <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+          TEEN<span class="text-rose-500">4</span>STEAM
+        </span>
+      </a>
+
+      <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="calendario.html">Xperience</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+        <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="ulearn.html">ULearn</a>
+        <a class="px-2 py-2 text-[12px] font-black text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">Our Playground</a>
+      </div>
+
+      <div class="flex items-center gap-4 shrink-0">
+        <div class="relative group hidden md:block">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+          <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+            <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+            <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text" />
+          </div>
+        </div>
+        <button class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+          <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+          </div>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="game-area">
+    <div id="hud">⭐ <span id="score">0</span> / 20 | ❤️ <span id="lives">3</span></div>
+    
+    <div id="apps">
+      <div class="app" onclick="openApp('mail')">📧</div>
+      <div class="app" onclick="openApp('chat')">💬</div>
+      <div class="app" onclick="openApp('web')">🌐</div>
+    </div>
+
+    <div id="window">
+      <div id="topbar">Cybersecurity Challenge</div>
+      <div id="content">
+        <p class="text-center mt-10 font-bold text-lg">Select an app to start cleaning threats!</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="modal"><div id="modalContent"></div></div>
+
+  <footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.</p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                    <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary cursor-default"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="ulearn.html">ULearn</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Our Playground</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  <script>
+    let score=0; let lives=3;
+    const data={
+      mail:[{t:"You won a prize 😱",ty:"bad"},{t:"School email",ty:"good"},{t:"Verify your account",ty:"bad"},{t:"Invoice",ty:"good"},{t:"Urgent reward",ty:"bad"},{t:"Teacher message",ty:"good"},{t:"Account blocked",ty:"bad"},{t:"Confirmation",ty:"good"},{t:"Free gift",ty:"bad"},{t:"Update available",ty:"good"},{t:"Earn money fast",ty:"bad"},{t:"Class schedule",ty:"good"}],
+      chat:[{t:"Send password",ty:"bad"},{t:"Hi 💖",ty:"good"},{t:"Free link",ty:"bad"},{t:"See you later",ty:"good"},{t:"Easy hack",ty:"bad"},{t:"Homework?",ty:"good"},{t:"Download this",ty:"bad"},{t:"Hello friend",ty:"good"},{t:"Free code",ty:"bad"},{t:"Wanna play?",ty:"good"}],
+      web:[{t:"secure.edu",ty:"good"},{t:"fake-prize.xyz",ty:"bad"},{t:"bank.com",ty:"good"},{t:"virus-download.ru",ty:"bad"},{t:"shop.com",ty:"good"},{t:"free-money.xyz",ty:"bad"},{t:"google.com",ty:"good"},{t:"click-here.xyz",ty:"bad"}]
+    };
+
+    function updateHUD(){
+      document.getElementById("score").textContent=score;
+      document.getElementById("lives").textContent=lives;
+    }
+
+    function openApp(app){
+      let html=`<div id="topbar">${app.toUpperCase()}</div><div id="content">`;
+      data[app].forEach((item,i)=>{
+        if(item){
+          html+=`<div class="card" onclick="openMsg('${app}',${i})"><span>${item.t}</span><button class="delete" onclick="del('${app}',${i},event)">🗑️</button></div>`;
+        }
+      });
+      html+="</div>";
+      document.getElementById("window").innerHTML=html;
+    }
+
+    function openMsg(app,i){
+      const item=data[app][i];
+      if(item.ty==="bad"){
+        document.getElementById("game-area").innerHTML="<h1 style='color:white;width:100%;text-align:center;margin-top:100px;font-size:3rem;'>💀 Virus Detected! Game Over</h1>";
+        return;
+      }
+      document.getElementById("modalContent").innerHTML=`<h3>${item.t}</h3><p>Safe message ✔️</p><button class="mt-4 bg-primary text-white px-4 py-2 rounded" onclick="closeM()">Close</button>`;
+      document.getElementById("modal").style.display="flex";
+    }
+
+    function closeM(){ document.getElementById("modal").style.display="none"; }
+
+    function del(app,i,e){
+      e.stopPropagation();
+      const item=data[app][i];
+      if(item.ty==="bad"){ score++; } else { lives--; }
+      data[app][i]=null;
+      updateHUD();
+      openApp(app);
+      if(lives<=0) document.getElementById("game-area").innerHTML="<h1 style='color:white;width:100%;text-align:center;margin-top:100px;font-size:3rem;'>💀 Game Over</h1>";
+      if(score>=20) document.getElementById("game-area").innerHTML="<h1 style='color:white;width:100%;text-align:center;margin-top:100px;font-size:3rem;'>🎉 YOU WIN</h1>";
+    }
+  </script>
+</body>
+</html>

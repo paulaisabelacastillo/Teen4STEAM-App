@@ -1,272 +1,334 @@
 <!DOCTYPE html>
-<html lang="en"> <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Xpierence Calendar | TEEN4STEAM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#e6197c",
-                        "secondary": "#4db9bd",
-                        "accent": "#ef972c",
-                        "background-light": "#fff1f2",
-                        "background-dark": "#211119",
+                        "primary": "#da237b",
+                        "secondary": "#4a1a79",
+                        "science": "#5cb85c",     
+                        "technology": "#f0ad4e",  
+                        "engineering": "#a066d3", 
+                        "art": "#e051b8",         
+                        "math": "#4fa8c7",        
+                        "text-main": "#1e293b",
+                        "text-muted": "#64748b"
                     },
-                    fontFamily: {
-                        "display": ["Space Grotesk", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
                 },
             },
         }
     </script>
-<style>
-        body {
-            font-family: "Space Grotesk", sans-serif;
-        }
+    <style type="text/tailwindcss">
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fff1f2; color: #1e293b; }
+        .soft-shadow { box-shadow: 0 10px 30px -10px rgba(74, 26, 121, 0.08); }
+        .calendar-day.active { @apply ring-4 ring-inset ring-primary/30 bg-primary/5 font-bold; }
+        .calendar-day.today { @apply bg-rose-100/50; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #da237b; border-radius: 10px; }
+        .modal-active { display: flex !important; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark min-h-screen text-slate-900 dark:text-slate-100">
-<div class="layout-container flex h-full grow flex-col">
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-10 py-4 sticky top-0 z-50">
-<div class="flex items-center gap-8">
-<div class="flex items-center gap-3 text-primary">
-<div class="size-8 flex items-center justify-center">
-<span class="material-symbols-outlined text-3xl font-bold">storm</span>
-</div>
-<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">TEEN4STEAM</h2>
-</div>
-<nav class="hidden lg:flex items-center gap-6">
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Home</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Community</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">AI Tutor</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Experience</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Marketplace</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Podcast</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Festival</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Our Playground</a>
+<body class="bg-[#fff1f2]">
+
+
+<nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+        
+        <a href="home.html" class="flex items-center gap-2 group shrink-0">
+            <div class="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+                <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+            </div>
+            <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+                TEEN<span class="text-rose-500">4</span>STEAM
+            </span>
+        </a>
+
+        <div class="hidden xl:flex items-center gap-3 2xl:gap-5">
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="home.html">Home</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="community.html">Community</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="tutor.html">AI Tutor</a>
+            <a class="px-2 py-2 text-[12px] font-bold text-rose-600" href="calendario.html">Xperience</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="market.html">Marketplace</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="voices.html">Voices</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="festival.html">Festival</a>
+            <a class="px-2 py-2 text-[12px] font-medium text-slate-500 hover:text-slate-900 whitespace-nowrap transition-colors" href="ulearn.html">ULearn</a>
+            
+            <a class="px-2 py-2 text-[12px] font-black text-slate-900 hover:text-rose-600 whitespace-nowrap transition-colors underline decoration-rose-300 decoration-2 underline-offset-4" href="signup.html">
+                Our Playground
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4 shrink-0">
+            <div class="relative group hidden md:block">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-rose-400 to-orange-300 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                <div class="relative flex items-center bg-white border border-rose-100 rounded-full px-4 py-1.5 transition-all shadow-sm group-hover:shadow-md">
+                    <span class="material-symbols-outlined text-rose-500 text-lg group-hover:scale-110 transition-transform">search</span>
+                    <input class="bg-transparent border-none focus:ring-0 text-xs w-20 focus:w-36 transition-all duration-300 placeholder:text-slate-400 text-slate-700 ml-1 font-medium" placeholder="Explorar" type="text"/>
+                </div>
+            </div>
+
+            <button id="navProfileBtn" class="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-purple-400 to-orange-400 shadow-sm transition-transform hover:scale-110 active:scale-95">
+                <div class="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white">
+                    <img id="navProfilePic" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full object-cover" alt="Profile">
+                </div>
+            </button>
+        </div>
+    </div>
 </nav>
-</div>
-<div class="flex items-center gap-4">
-<div class="hidden md:flex bg-primary/5 dark:bg-primary/20 rounded-full px-4 py-2 items-center gap-2 border border-primary/10">
-<span class="material-symbols-outlined text-primary text-xl">search</span>
-<input class="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-slate-400" placeholder="Search activities..." type="text"/>
-</div>
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="User profile avatar of a young girl" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5ppvhT0M6ZK4J9JzPK0aN2uW2XVUMuoTlDUzjQpPz17JrpHaYGqZaJIGASJSG3CGVkax5i3MirgnDEiLGqpeoM4K_gTJjhElknHkpLzJKwG9yjWsDkTS3jCNPFYRAVelp563Ac_cElFEVtWz3TFjaG3V6a8zE-LFjv3CUS9Zs3z7_bEx-U28ZCuuMgh7H8GhykmbQs-uDKmN3sTEMSdGTDKRhnW0pCMWAO8_YvB5DMt5bE5nK47q8i-iu1xTBMZx6Gx_Tx5XYL2I");'></div>
-</div>
-</header>
-<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
-<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
-<div class="space-y-2">
-<h1 class="text-4xl font-black text-slate-900 dark:text-slate-100 tracking-tight">STEAM Calendar</h1>
-<p class="text-slate-600 dark:text-slate-400 max-w-lg">Explore and book robotics, science, and technology workshops designed for the leaders of the future.</p>
-</div>
-<div class="flex bg-white dark:bg-slate-800 p-1.5 rounded-full shadow-sm border border-primary/10">
-<button class="px-6 py-2 rounded-full text-sm font-semibold text-slate-500 dark:text-slate-400 hover:bg-primary/5 transition-all">Previous month</button>
-<button class="px-6 py-2 rounded-full text-sm font-semibold bg-primary text-white shadow-lg shadow-primary/25">Current month</button>
-<button class="px-6 py-2 rounded-full text-sm font-semibold text-slate-500 dark:text-slate-400 hover:bg-primary/5 transition-all">Next month</button>
-</div>
-</div>
-<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
-<div class="xl:col-span-8 space-y-4">
-<div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl shadow-primary/5 border border-primary/10 overflow-hidden">
-<div class="flex items-center justify-between p-6 border-b border-primary/5">
-<button class="p-2 hover:bg-primary/5 rounded-full transition-colors">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<h3 class="text-xl font-bold text-slate-800 dark:text-slate-200">October 2023</h3>
-<button class="p-2 hover:bg-primary/5 rounded-full transition-colors">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
-<div class="grid grid-cols-7 border-b border-primary/5 bg-slate-50/50 dark:bg-slate-800/50">
-<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Sun</div>
-<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Mon</div>
-<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Tue</div>
-<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Wed</div>
-<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Thu</div>
-<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Fri</div>
-<div class="py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Sat</div>
-</div>
-<div class="grid grid-cols-7 auto-rows-fr">
-<div class="aspect-square border-r border-b border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative group cursor-pointer hover:bg-primary/5 transition-colors">
-<span class="text-sm font-medium text-slate-600 dark:text-slate-400">1</span>
-<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-</div>
-</div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors">
-<span class="text-sm font-medium text-slate-600 dark:text-slate-400">2</span>
-</div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors">
-<span class="text-sm font-medium text-slate-600 dark:text-slate-400">3</span>
-<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-</div>
-</div>
-<div class="aspect-square border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors">
-<span class="text-sm font-medium text-slate-600 dark:text-slate-400">4</span>
-</div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 bg-primary/10 relative cursor-pointer ring-2 ring-inset ring-primary">
-<span class="text-sm font-bold text-primary">5</span>
-<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-<span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-</div>
-</div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">6</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">7</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">8</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">9</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">10</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">11</span></div>
-<div class="aspect-square border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">12</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors">
-<span class="text-sm font-medium text-slate-600 dark:text-slate-400">13</span>
-<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-<span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-</div>
-</div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">14</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">15</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">16</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">17</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">18</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">19</span></div>
-<div class="aspect-square border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">20</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">21</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">22</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">23</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">24</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">25</span></div>
-<div class="aspect-square border-r border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">26</span></div>
-<div class="aspect-square border-b border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">27</span></div>
-<div class="aspect-square border-r border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">28</span></div>
-<div class="aspect-square border-r border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">29</span></div>
-<div class="aspect-square border-r border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">30</span></div>
-<div class="aspect-square border-r border-primary/5 p-2 relative cursor-pointer hover:bg-primary/5 transition-colors"><span class="text-sm font-medium text-slate-600 dark:text-slate-400">31</span></div>
-<div class="aspect-square border-r border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
-<div class="aspect-square border-r border-primary/5 p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
-<div class="aspect-square p-2 bg-slate-50/30 dark:bg-slate-800/20"></div>
-</div>
-</div>
-<div class="flex flex-wrap gap-6 items-center pt-2">
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 rounded-full bg-primary"></span>
-<span class="text-xs font-medium text-slate-500 uppercase">Robotics</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 rounded-full bg-secondary"></span>
-<span class="text-xs font-medium text-slate-500 uppercase">Science</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 rounded-full bg-accent"></span>
-<span class="text-xs font-medium text-slate-500 uppercase">Technology</span>
-</div>
-</div>
-</div>
-<div class="xl:col-span-4 space-y-6">
-<div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl shadow-primary/5 border border-primary/10 p-6 flex flex-col h-full">
-<div class="flex items-center justify-between mb-6">
-<h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Events of the Day</h2>
-<span class="bg-primary/10 text-primary text-sm font-bold px-3 py-1 rounded-full">5 Oct</span>
-</div>
-<div class="space-y-4 overflow-y-auto max-h-[600px] pr-2">
-<div class="p-4 rounded-xl border border-primary/10 bg-primary/5 hover:bg-primary/10 transition-all border-l-4 border-l-primary">
-<div class="flex justify-between items-start mb-2">
-<h4 class="font-bold text-slate-800 dark:text-slate-200">Basic Robotics Workshop</h4>
-<span class="material-symbols-outlined text-primary text-xl">smart_toy</span>
-</div>
-<div class="flex flex-col gap-1 mb-4">
-<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-<span class="material-symbols-outlined text-base">schedule</span>
-<span>10:00 AM - 12:00 PM</span>
-</div>
-<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-<span class="material-symbols-outlined text-base">videocam</span>
-<span>Online (Zoom)</span>
-</div>
-</div>
-<button class="w-full py-2.5 bg-primary text-white font-bold rounded-lg hover:brightness-110 transition-all text-sm">Book my spot</button>
-</div>
-<div class="p-4 rounded-xl border border-accent/10 bg-accent/5 hover:bg-accent/10 transition-all border-l-4 border-l-accent">
-<div class="flex justify-between items-start mb-2">
-<h4 class="font-bold text-slate-800 dark:text-slate-200">Intro to Web Programming</h4>
-<span class="material-symbols-outlined text-accent text-xl">code</span>
-</div>
-<div class="flex flex-col gap-1 mb-4">
-<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-<span class="material-symbols-outlined text-base">schedule</span>
-<span>03:00 PM - 05:00 PM</span>
-</div>
-<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-<span class="material-symbols-outlined text-base">location_on</span>
-<span>STEAM Hub - Madrid</span>
-</div>
-</div>
-<button class="w-full py-2.5 bg-accent text-white font-bold rounded-lg hover:brightness-110 transition-all text-sm">Book my spot</button>
-</div>
-<div class="p-4 rounded-xl border border-secondary/10 bg-secondary/5 hover:bg-secondary/10 transition-all border-l-4 border-l-secondary">
-<div class="flex justify-between items-start mb-2">
-<h4 class="font-bold text-slate-800 dark:text-slate-200">Energy Lab</h4>
-<span class="material-symbols-outlined text-secondary text-xl">bolt</span>
-</div>
-<div class="flex flex-col gap-1 mb-4">
-<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-<span class="material-symbols-outlined text-base">schedule</span>
-<span>06:00 PM - 07:30 PM</span>
-</div>
-<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-<span class="material-symbols-outlined text-base">videocam</span>
-<span>Online (Meet)</span>
-</div>
-</div>
-<button class="w-full py-2.5 bg-secondary text-white font-bold rounded-lg hover:brightness-110 transition-all text-sm">Book my spot</button>
-</div>
-</div>
-<div class="mt-auto pt-6 border-t border-primary/5">
-<div class="bg-gradient-to-br from-primary to-accent p-4 rounded-xl text-white">
-<p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Coming Soon</p>
-<h5 class="font-bold text-lg mb-2 leading-tight">Annual STEAM Festival</h5>
-<p class="text-xs mb-3 opacity-90 leading-relaxed">Join the largest celebration of innovation for girls in LATAM.</p>
-<a class="text-xs font-bold underline" href="#">Learn more</a>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+<main class="max-w-7xl mx-auto px-6 py-12 text-left">
+    <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+            <h1 class="text-4xl font-black text-secondary tracking-tight mb-2 uppercase italic font-display">STEAM Xpierence</h1>
+            <p class="text-text-muted max-w-lg font-medium italic">Discover and propose STEAM events worldwide!</p>
+        </div>
+        <div class="flex items-center bg-white p-1 rounded-full soft-shadow border border-rose-100">
+            <button onclick="changeMonth(-1)" class="p-2 hover:bg-rose-50 rounded-full transition-colors"><span class="material-symbols-outlined text-rose-600">chevron_left</span></button>
+            <span id="calendar-month-year" class="px-6 text-[10px] font-black bg-secondary text-white py-2 rounded-full min-w-[150px] text-center uppercase tracking-widest">April 2026</span>
+            <button onclick="changeMonth(1)" class="p-2 hover:bg-rose-50 rounded-full transition-colors"><span class="material-symbols-outlined text-rose-600">chevron_right</span></button>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+        <div class="xl:col-span-8">
+            <div class="bg-white rounded-[2rem] soft-shadow border border-rose-100 overflow-hidden">
+                <div class="grid grid-cols-7 bg-rose-50/50 border-b border-rose-100 text-center py-4 font-black text-[10px] text-slate-400 uppercase tracking-widest">
+                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+                <div class="grid grid-cols-7" id="calendar-days"></div>
+            </div>
+            <div class="flex flex-wrap gap-4 mt-8 justify-center">
+                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-rose-100 soft-shadow"><span class="w-3 h-3 rounded-full bg-science"></span><span class="text-[10px] font-bold uppercase tracking-widest">Science</span></div>
+                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-rose-100 soft-shadow"><span class="w-3 h-3 rounded-full bg-technology"></span><span class="text-[10px] font-bold uppercase tracking-widest">Technology</span></div>
+                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-rose-100 soft-shadow"><span class="w-3 h-3 rounded-full bg-engineering"></span><span class="text-[10px] font-bold uppercase tracking-widest">Engineering</span></div>
+                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-rose-100 soft-shadow"><span class="w-3 h-3 rounded-full bg-art"></span><span class="text-[10px] font-bold uppercase tracking-widest">Art</span></div>
+                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-rose-100 soft-shadow"><span class="w-3 h-3 rounded-full bg-math"></span><span class="text-[10px] font-bold uppercase tracking-widest">Math</span></div>
+            </div>
+        </div>
+
+        <div class="xl:col-span-4 space-y-6">
+            <div class="bg-white rounded-[2rem] soft-shadow border border-rose-100 p-8 min-h-[450px] flex flex-col">
+                <h3 class="text-xl font-black text-secondary mb-8 uppercase tracking-tighter flex items-center gap-2">
+                    <span class="material-symbols-outlined text-rose-500">event_note</span>
+                    Events <span id="current-day-label" class="text-[10px] bg-rose-100 text-rose-600 px-3 py-1 rounded-full ml-auto uppercase font-black">Day</span>
+                </h3>
+                <div id="event-list" class="space-y-4 flex-1 custom-scrollbar overflow-y-auto pr-2"></div>
+                <div class="mt-8 pt-8 border-t border-rose-50">
+                    <button onclick="window.toggleModal('eventProposalModal')" class="w-full p-6 rounded-[2rem] border-2 border-dashed border-rose-300 text-rose-500 font-black flex flex-col items-center gap-2 hover:bg-rose-50 transition-all">
+                        <span class="material-symbols-outlined text-4xl">add_circle</span>
+                        <span class="text-xs uppercase tracking-widest">Propose Activity</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
-<footer class="bg-white dark:bg-background-dark border-t border-primary/10 py-10 mt-12 px-10">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="flex items-center gap-3 text-primary grayscale opacity-50">
-<span class="material-symbols-outlined text-2xl">storm</span>
-<span class="font-bold text-slate-800 dark:text-slate-200">TEEN4STEAM</span>
+
+<div id="eventProposalModal" class="fixed inset-0 bg-secondary/90 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-[2.5rem] p-10 shadow-2xl text-left overflow-y-auto max-h-[90vh] custom-scrollbar">
+        <h2 class="text-2xl font-black text-secondary mb-6 italic uppercase tracking-tighter text-center">Propose Event</h2>
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <input id="propAuthor" type="text" placeholder="Organization Name" class="p-4 rounded-2xl border-none bg-rose-50 outline-none font-bold">
+                <input id="propAge" type="text" placeholder="Target Age" class="p-4 rounded-2xl border-none bg-rose-50 outline-none font-bold">
+            </div>
+            <input id="propEmail" type="email" placeholder="Organization Email" class="w-full p-4 rounded-2xl border-none bg-rose-50 outline-none font-bold">
+            <div class="grid grid-cols-2 gap-4">
+                <select id="propCountry" class="p-4 rounded-2xl border-none bg-rose-50 text-secondary font-black text-[10px] uppercase">
+                    <option value="">Select Country</option>
+                    <option value="Panama">Panama</option><option value="Colombia">Colombia</option><option value="Mexico">Mexico</option>
+                    <option value="Costa Rica">Costa Rica</option><option value="USA">USA</option><option value="Spain">Spain</option>
+                </select>
+                <select id="propMode" class="p-4 rounded-2xl border-none bg-rose-50 text-secondary font-black text-[10px] uppercase">
+                    <option value="In-person">In-person</option><option value="Virtual">Virtual</option>
+                </select>
+            </div>
+            <input id="propTitle" type="text" placeholder="Activity Title" class="w-full p-4 rounded-2xl border-none bg-rose-50 outline-none font-bold">
+            <div class="grid grid-cols-2 gap-4">
+                <input id="propDate" type="date" class="w-full p-4 rounded-2xl border-none bg-rose-50 outline-none font-bold">
+                <input id="propTime" type="time" class="w-full p-4 rounded-2xl border-none bg-rose-50 outline-none font-bold">
+            </div>
+            <select id="propCat" class="w-full p-4 rounded-2xl border-none bg-rose-50 text-secondary font-black uppercase text-[10px]">
+                <option value="science">Science</option><option value="technology">Technology</option><option value="engineering">Engineering</option><option value="art">Art</option><option value="math">Math</option>
+            </select>
+            <input id="propLoc" type="text" placeholder="Location Details" class="w-full p-4 rounded-2xl border-none bg-rose-50 outline-none font-bold">
+            <input id="propLink" type="url" placeholder="Registration Link" class="w-full p-4 rounded-2xl border-none bg-rose-50 outline-none font-bold">
+            <div class="flex gap-4 pt-4">
+                <button onclick="window.toggleModal('eventProposalModal')" class="flex-1 font-black text-slate-400 uppercase text-xs">Cancel</button>
+                <button onclick="window.submitEvent()" class="flex-1 py-4 bg-primary text-white rounded-2xl font-black shadow-lg uppercase text-xs">Submit</button>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="flex gap-8">
-<a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">Privacy</a>
-<a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">Terms</a>
-<a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">Contact</a>
-</div>
-<div class="flex gap-4">
-<a class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-primary transition-all" href="#">
-<span class="material-symbols-outlined text-lg">share</span>
-</a>
-<a class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-primary transition-all" href="#">
-<span class="material-symbols-outlined text-lg">star</span>
-</a>
-</div>
-</div>
+
+
+<footer class="bg-white border-t border-rose-100 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="img/logo.png" class="w-full h-full object-contain" alt="TEEN4STEAM Logo">
+                    </div>
+                    <h3 class="font-black text-2xl tracking-tighter text-secondary uppercase">TEEN4STEAM</h3>
+                </div>
+                <p class="text-text-muted text-lg max-w-sm leading-snug font-medium">Teen4STEAM is a STEAM community built by girls for girls, empowering the next generation of female leaders through gamified innovation and technology.</p>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://www.instagram.com/teen4steam" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#E1306C] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.youtube.com/@Teen4STEAM-r5b" target="_blank" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary hover:bg-[#FF0000] hover:text-white transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                    <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-primary cursor-default"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 col-span-2 gap-8">
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="home.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="community.html">Community</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="tutor.html">AI Tutor</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="calendario.html">Xperience</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="market.html">Marketplace</a></li>
+                </ul>
+                <ul class="space-y-4 text-sm text-text-muted font-bold">
+                    <li><a class="hover:text-primary transition-colors" href="voices.html">Voices</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="festival.html">Festival</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="ulearn.html">ULearn</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="signup.html">Our Playground</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-rose-100 flex justify-between items-center">
+            <p class="text-text-muted text-xs font-black tracking-widest uppercase">© TEEN4STEAM</p>
+            <div class="flex gap-6 text-[10px] font-bold uppercase text-slate-400 tracking-tighter">
+                <a href="#" class="hover:text-secondary">Privacy</a>
+                <a href="#" class="hover:text-secondary">Terms</a>
+            </div>
+        </div>
+    </div>
 </footer>
-</div>
-</body></html>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBtJZ9-pjUmppxctfee3uGX2aADL8D9evk",
+        authDomain: "login-steam-educ.firebaseapp.com",
+        projectId: "login-steam-educ",
+        storageBucket: "login-steam-educ.firebasestorage.app",
+        messagingSenderId: "914739570610",
+        appId: "1:914739570610:web:3c3bc621ed7fc888a2a6ab"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const eventsRef = collection(db, "events");
+
+    let currentDate = new Date();
+    let approvedEvents = [];
+    const countryFlags = { "Panama": "🇵🇦", "Colombia": "🇨🇴", "Mexico": "🇲🇽", "Costa Rica": "🇨🇷", "USA": "🇺🇸", "Spain": "🇪🇸" };
+
+    window.toggleModal = (id) => document.getElementById(id).classList.toggle('modal-active');
+
+    window.submitEvent = async () => {
+        const title = document.getElementById('propTitle').value;
+        const author = document.getElementById('propAuthor').value;
+        const email = document.getElementById('propEmail').value;
+        const country = document.getElementById('propCountry').value;
+        const mode = document.getElementById('propMode').value;
+        const age = document.getElementById('propAge').value;
+        const dateInput = document.getElementById('propDate').value;
+        const time = document.getElementById('propTime').value;
+        const category = document.getElementById('propCat').value;
+        const location = document.getElementById('propLoc').value;
+        const link = document.getElementById('propLink').value;
+
+        if(!title || !dateInput || !author || !country || !email) { alert("Missing fields!"); return; }
+
+        try {
+            await addDoc(eventsRef, {
+                name: title, author, email, country, mode, age, date: dateInput, time, category, location, link,
+                status: "Pendiente", createdAt: new Date()
+            });
+            alert("Proposed successfully!");
+            window.toggleModal('eventProposalModal');
+        } catch (e) { console.error(e); }
+    };
+
+    onSnapshot(eventsRef, (snapshot) => {
+        approvedEvents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+            .filter(ev => ev.status === "Aceptado" || ev.status === "Aceptada");
+        window.renderCalendar();
+    });
+
+    window.renderCalendar = () => {
+        const daysContainer = document.getElementById('calendar-days');
+        const monthYearLabel = document.getElementById('calendar-month-year');
+        daysContainer.innerHTML = '';
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        monthYearLabel.innerText = `${new Intl.DateTimeFormat('en-US', { month: 'long' }).format(currentDate)} ${year}`;
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDate = new Date(year, month + 1, 0).getDate();
+        for (let i = 0; i < firstDay; i++) { daysContainer.innerHTML += `<div class="aspect-square border-r border-b border-rose-50 bg-rose-50/10"></div>`; }
+        for (let day = 1; day <= lastDate; day++) {
+            const m = String(month + 1).padStart(2, '0');
+            const d = String(day).padStart(2, '0');
+            const dateStr = `${year}-${m}-${d}`;
+            const dayEvents = approvedEvents.filter(ev => ev.date === dateStr);
+            const isToday = new Date().toDateString() === new Date(year, month, day).toDateString();
+            const dayDiv = document.createElement('div');
+            dayDiv.className = `aspect-square border-r border-b border-rose-100 p-2 relative cursor-pointer hover:bg-rose-50 calendar-day ${isToday ? 'today' : ''}`;
+            dayDiv.innerHTML = `<span class="text-[10px] font-black ${isToday ? 'text-rose-600' : 'text-slate-400'}">${day}</span>`;
+            if (dayEvents.length > 0) {
+                const dots = dayEvents.map(ev => `<span class="w-2 h-2 rounded-full shadow-sm" style="background-color: ${getHex(ev.category)}"></span>`).join('');
+                dayDiv.innerHTML += `<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">${dots}</div>`;
+            }
+            dayDiv.onclick = () => showEventsForDay(day, dayEvents, dayDiv);
+            daysContainer.appendChild(dayDiv);
+        }
+    };
+
+    function showEventsForDay(day, events, el) {
+        document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('active'));
+        if(el) el.classList.add('active');
+        document.getElementById('current-day-label').innerText = `Day ${day}`;
+        const list = document.getElementById('event-list');
+        list.innerHTML = events.length ? '' : `<div class="text-center py-20 opacity-30 flex flex-col items-center"><span class="material-symbols-outlined text-5xl mb-2">event_busy</span><p class="text-[10px] font-black uppercase tracking-widest">No activities</p></div>`;
+        events.forEach(e => {
+            const flag = countryFlags[e.country] || "🌐";
+            const modeIcon = e.mode === "Virtual" ? "computer" : "location_on";
+            const catColor = getHex(e.category);
+            list.innerHTML += `
+                <div class="p-6 rounded-[2.5rem] border-l-[10px] bg-rose-50/50 soft-shadow text-left fade-in mb-4" style="border-left-color: ${catColor}">
+                    <p class="text-[11px] font-black uppercase tracking-widest mb-1 flex items-center gap-2" style="color: ${catColor}"><span class="text-2xl">${flag}</span> BY: ${e.author}</p>
+                    <h4 class="font-black text-secondary text-sm uppercase mb-3 leading-tight">${e.name || e.title}</h4>
+                    <div class="flex flex-col gap-2.5 text-[10px] font-bold text-text-muted uppercase tracking-wider">
+                        <p class="flex items-center gap-2.5"><span class="material-symbols-outlined text-sm" style="color: ${catColor}">schedule</span> ${e.time || '16:00'}</p>
+                        <p class="flex items-center gap-2.5"><span class="material-symbols-outlined text-sm" style="color: ${catColor}">${modeIcon}</span> ${e.mode || 'In-person'} • Age: ${e.age || 'All'}</p>
+                        <p class="flex items-center gap-2.5 text-slate-900 font-black"><span class="material-symbols-outlined text-sm" style="color: ${catColor}">pin_drop</span> ${e.location || 'TBA'}</p>
+                    </div>
+                    ${e.link ? `<a href="${e.link}" target="_blank" class="inline-block mt-5 w-full text-center bg-secondary text-white py-4 rounded-[1.5rem] text-[10px] font-black uppercase tracking-[0.2em] hover:bg-primary transition-all shadow-lg shadow-secondary/10">Register Now</a>` : ''}
+                </div>`;
+        });
+    }
+
+    window.changeMonth = (dir) => { currentDate.setMonth(currentDate.getMonth() + dir); window.renderCalendar(); };
+    function getHex(cat) { 
+        const colors = { science: '#5cb85c', technology: '#f0ad4e', engineering: '#a066d3', art: '#e051b8', math: '#4fa8c7' };
+        return colors[cat?.toLowerCase()] || '#da237b'; 
+    }
+    window.renderCalendar();
+</script>
+</body>
+</html>
